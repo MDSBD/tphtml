@@ -2647,5 +2647,743 @@ renderStep();
   setTimeout(apply, 250);
 })();
 </script>
+
+<!-- ================= LIVE CODING STUDIO ================= -->
+<section id="studio" style="padding:60px 0 30px">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Live Coding Studio</span>
+      <h2 class="sec-title">Écrivez, testez, voyez</h2>
+      <p class="sec-sub">
+        Modifiez le code à gauche : le rendu s'actualise à droite en moins d'une seconde.
+        Votre travail est sauvegardé automatiquement dans ce navigateur. Six défis progressifs vous attendent.
+      </p>
+    </div>
+
+    <div class="lcs" id="lcs">
+      <div class="lcs-head">
+        <div class="lcs-ex">
+          <label for="lcsSelect">🎯 Exercice :</label>
+          <select id="lcsSelect"></select>
+        </div>
+        <div class="lcs-actions">
+          <button class="mini-btn" id="lcsHint">💡 Indice</button>
+          <button class="mini-btn" id="lcsCompare">🔍 Comparer à la solution</button>
+          <button class="mini-btn" id="lcsReset">↺ Réinitialiser</button>
+        </div>
+      </div>
+
+      <div class="lcs-consigne" id="lcsConsigne"></div>
+
+      <div class="lcs-body">
+        <div class="lcs-editor">
+          <div class="lcs-tabs">
+            <button class="lcs-tab active" data-lang="html">HTML</button>
+            <button class="lcs-tab" data-lang="css">CSS</button>
+            <span class="lcs-status" id="lcsStatus">✓ Sauvegardé</span>
+          </div>
+          <textarea id="lcsCode" spellcheck="false"></textarea>
+        </div>
+
+        <div class="lcs-preview-wrap">
+          <div class="lcs-preview-head">
+            <span style="font-size:.78rem;font-weight:700;color:var(--muted)">APERÇU EN DIRECT</span>
+            <div class="lcs-devices">
+              <button class="dev-btn active" data-w="100%">🖥️</button>
+              <button class="dev-btn" data-w="768px">📱</button>
+              <button class="dev-btn" data-w="390px">📞</button>
+            </div>
+          </div>
+          <div class="lcs-preview-stage">
+            <iframe id="lcsFrame" title="Aperçu live"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="lcs-compare" id="lcsComparePanel" hidden>
+        <div class="lcs-compare-head">
+          <b>🔍 Comparaison</b>
+          <span style="font-size:.82rem;color:var(--muted)">Votre code à gauche · Solution de référence à droite</span>
+          <button class="mini-btn" id="lcsCloseCompare" style="margin-left:auto">✕ Fermer</button>
+        </div>
+        <div class="lcs-compare-body">
+          <pre class="code-block"><code id="lcsYourCode"></code></pre>
+          <pre class="code-block"><code id="lcsSolutionCode"></code></pre>
+        </div>
+      </div>
+
+      <div class="lcs-foot">
+        <span id="lcsInfo">0 caractère</span>
+        <span id="lcsDirty"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.lcs{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden}
+.lcs-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 20px;
+  background:var(--surface-2);border-bottom:1px solid var(--border)}
+.lcs-ex{display:flex;align-items:center;gap:10px;margin-right:auto}
+.lcs-ex label{font-size:.82rem;font-weight:700;color:var(--muted)}
+.lcs-ex select{padding:8px 12px;border-radius:10px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);font-family:inherit;font-size:.86rem;
+  font-weight:600;cursor:pointer;min-width:240px}
+.lcs-actions{display:flex;gap:8px;flex-wrap:wrap}
+.lcs-consigne{padding:16px 22px;background:var(--primary-soft);border-bottom:1px solid var(--border);
+  font-size:.9rem;color:var(--text);line-height:1.6}
+.lcs-consigne b{color:var(--primary)}
+.lcs-body{display:grid;grid-template-columns:1fr 1fr;min-height:460px}
+@media(max-width:900px){.lcs-body{grid-template-columns:1fr}}
+.lcs-editor{display:flex;flex-direction:column;background:var(--code-bg)}
+.lcs-tabs{display:flex;align-items:center;gap:4px;padding:8px 12px;
+  background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07)}
+.lcs-tab{padding:6px 14px;border-radius:7px;border:none;background:transparent;
+  color:#94a3b8;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;transition:.15s}
+.lcs-tab:hover{color:#e2e8f0}
+.lcs-tab.active{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff}
+.lcs-status{margin-left:auto;font-size:.72rem;color:#86efac;font-weight:600;transition:.2s}
+.lcs-status.dirty{color:#fbbf24}
+#lcsCode{flex:1;width:100%;min-height:400px;border:none;outline:none;resize:none;
+  background:var(--code-bg);color:var(--code-text);font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:.82rem;line-height:1.75;padding:18px;tab-size:2}
+.lcs-preview-wrap{display:flex;flex-direction:column;border-left:1px solid var(--border)}
+@media(max-width:900px){.lcs-preview-wrap{border-left:none;border-top:1px solid var(--border)}}
+.lcs-preview-head{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--border)}
+.lcs-devices{display:flex;gap:3px;background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:2px}
+.lcs-devices .dev-btn{border:none;background:none;padding:5px 10px;border-radius:6px;
+  font-size:.75rem;cursor:pointer;font-family:inherit;transition:.15s}
+.lcs-devices .dev-btn.active{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff}
+.lcs-preview-stage{flex:1;display:flex;justify-content:center;padding:14px;
+  background:repeating-conic-gradient(var(--surface-3) 0% 25%, transparent 0% 50%) 50%/18px 18px;
+  overflow:auto}
+#lcsFrame{width:100%;height:100%;min-height:400px;border:none;background:#fff;
+  border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.14);transition:width .35s}
+.lcs-foot{display:flex;justify-content:space-between;align-items:center;padding:9px 20px;
+  background:var(--surface-2);border-top:1px solid var(--border);font-size:.74rem;
+  color:var(--muted);font-weight:600}
+.lcs-compare{border-top:1px solid var(--border);background:var(--surface-2)}
+.lcs-compare-head{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border)}
+.lcs-compare-body{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 20px}
+@media(max-width:760px){.lcs-compare-body{grid-template-columns:1fr}}
+.lcs-compare-body pre{max-height:280px;overflow:auto}
+</style>
+
+<script>
+(function(){
+  var STORE_KEY = 'cv-live-studio-v1';
+
+  /* =====================================================
+     BIBLIOTHÈQUE D'EXERCICES
+  ===================================================== */
+  var EXERCISES = [
+    {
+      id: 'ex1',
+      titre: '1 · Carte de profil minimaliste',
+      consigne: 'Créez une <b>carte de profil</b> avec une photo ronde, un nom en &lt;h1&gt;, un titre en &lt;p&gt; et une courte biographie. Centrez la carte sur la page avec <code>margin: auto</code> et arrondissez ses coins.',
+      hint: 'Pensez à : <code>border-radius: 50%</code> pour la photo, <code>max-width</code> + <code>margin: auto</code> pour centrer la carte, <code>box-shadow</code> pour la profondeur.',
+      html:
+'<div class="carte">\n' +
+'  <img src="https://i.pravatar.cc/120?img=32" alt="Photo de profil">\n' +
+'  <h1>Yasmine El Idrissi</h1>\n' +
+'  <p class="titre">Étudiante en Management</p>\n' +
+'  <p class="bio">Passionnée par le marketing digital et la création de contenu.</p>\n' +
+'</div>',
+      css:
+'.carte {\n' +
+'  max-width: 320px;\n' +
+'  margin: 40px auto;\n' +
+'  padding: 30px 24px;\n' +
+'  background: #fff;\n' +
+'  border-radius: 16px;\n' +
+'  box-shadow: 0 12px 32px rgba(0,0,0,.10);\n' +
+'  text-align: center;\n' +
+'  font-family: system-ui, sans-serif;\n' +
+'}\n' +
+'.carte img {\n' +
+'  width: 96px;\n' +
+'  height: 96px;\n' +
+'  border-radius: 50%;\n' +
+'  object-fit: cover;\n' +
+'  border: 3px solid #4f46e5;\n' +
+'}\n' +
+'.carte h1 { font-size: 1.4rem; margin: 14px 0 4px; }\n' +
+'.titre { color: #4f46e5; font-weight: 600; margin: 0 0 12px; }\n' +
+'.bio { color: #666; font-size: .9rem; margin: 0; }',
+      solutionHtml:
+'<div class="carte">\n' +
+'  <img src="https://i.pravatar.cc/120?img=32" alt="Photo de profil">\n' +
+'  <h1>Yasmine El Idrissi</h1>\n' +
+'  <p class="titre">Étudiante en Management</p>\n' +
+'  <p class="bio">Passionnée par le marketing digital et la création de contenu.</p>\n' +
+'</div>',
+      solutionCss:
+'.carte {\n' +
+'  max-width: 320px;\n' +
+'  margin: 40px auto;\n' +
+'  padding: 30px 24px;\n' +
+'  background: #fff;\n' +
+'  border-radius: 16px;\n' +
+'  box-shadow: 0 12px 32px rgba(0,0,0,.10);\n' +
+'  text-align: center;\n' +
+'  font-family: system-ui, sans-serif;\n' +
+'}\n' +
+'.carte img {\n' +
+'  width: 96px;\n' +
+'  height: 96px;\n' +
+'  border-radius: 50%;\n' +
+'  object-fit: cover;\n' +
+'  border: 3px solid #4f46e5;\n' +
+'}\n' +
+'.carte h1 { font-size: 1.4rem; margin: 14px 0 4px; }\n' +
+'.titre { color: #4f46e5; font-weight: 600; margin: 0 0 12px; }\n' +
+'.bio { color: #666; font-size: .9rem; margin: 0; }'
+    },
+
+    {
+      id: 'ex2',
+      titre: '2 · Barre de navigation Flexbox',
+      consigne: 'Construisez une <b>barre de navigation</b> : un logo à gauche, trois liens à droite, tout aligné verticalement. Utilisez <code>display: flex</code> et <code>justify-content: space-between</code>.',
+      hint: 'Le logo et les liens doivent être dans la même <code>&lt;nav&gt;</code>. Sur la <code>nav</code> : <code>display: flex; justify-content: space-between; align-items: center;</code>',
+      html:
+'<nav class="navbar">\n' +
+'  <span class="logo">MonSite</span>\n' +
+'  <ul class="menu">\n' +
+'    <li><a href="#">Accueil</a></li>\n' +
+'    <li><a href="#">Services</a></li>\n' +
+'    <li><a href="#">Contact</a></li>\n' +
+'  </ul>\n' +
+'</nav>',
+      css:
+'body { font-family: system-ui, sans-serif; margin: 0; background: #eef2f7; }\n' +
+'.navbar {\n' +
+'  display: flex;\n' +
+'  justify-content: space-between;\n' +
+'  align-items: center;\n' +
+'  padding: 16px 28px;\n' +
+'  background: #fff;\n' +
+'  box-shadow: 0 2px 12px rgba(0,0,0,.06);\n' +
+'}\n' +
+'.logo { font-weight: 800; color: #4f46e5; font-size: 1.1rem; }\n' +
+'.menu { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }\n' +
+'.menu a { text-decoration: none; color: #555; font-weight: 600; font-size: .9rem; }\n' +
+'.menu a:hover { color: #4f46e5; }',
+      solutionHtml:
+'<nav class="navbar">\n' +
+'  <span class="logo">MonSite</span>\n' +
+'  <ul class="menu">\n' +
+'    <li><a href="#">Accueil</a></li>\n' +
+'    <li><a href="#">Services</a></li>\n' +
+'    <li><a href="#">Contact</a></li>\n' +
+'  </ul>\n' +
+'</nav>',
+      solutionCss:
+'body { font-family: system-ui, sans-serif; margin: 0; background: #eef2f7; }\n' +
+'.navbar {\n' +
+'  display: flex;\n' +
+'  justify-content: space-between;\n' +
+'  align-items: center;\n' +
+'  padding: 16px 28px;\n' +
+'  background: #fff;\n' +
+'  box-shadow: 0 2px 12px rgba(0,0,0,.06);\n' +
+'}\n' +
+'.logo { font-weight: 800; color: #4f46e5; font-size: 1.1rem; }\n' +
+'.menu { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }\n' +
+'.menu a { text-decoration: none; color: #555; font-weight: 600; font-size: .9rem; }\n' +
+'.menu a:hover { color: #4f46e5; }'
+    },
+
+    {
+      id: 'ex3',
+      titre: '3 · Grille de cartes avec CSS Grid',
+      consigne: 'Affichez <b>trois cartes de service</b> dans une grille qui s\'adapte automatiquement à la largeur de l\'écran. Utilisez <code>display: grid</code> et <code>repeat(auto-fit, minmax(180px, 1fr))</code>.',
+      hint: 'Sur le conteneur : <code>display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;</code>',
+      html:
+'<h2>Nos services</h2>\n' +
+'<div class="grille">\n' +
+'  <article class="card"><h3>Design</h3><p>Interfaces modernes et accessibles.</p></article>\n' +
+'  <article class="card"><h3>Développement</h3><p>Sites rapides et sur mesure.</p></article>\n' +
+'  <article class="card"><h3>SEO</h3><p>Visibilité sur les moteurs de recherche.</p></article>\n' +
+'</div>',
+      css:
+'body { font-family: system-ui, sans-serif; padding: 24px; background: #eef2f7; }\n' +
+'h2 { color: #1e293b; }\n' +
+'.grille {\n' +
+'  display: grid;\n' +
+'  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));\n' +
+'  gap: 16px;\n' +
+'  margin-top: 14px;\n' +
+'}\n' +
+'.card {\n' +
+'  background: #fff;\n' +
+'  padding: 22px;\n' +
+'  border-radius: 14px;\n' +
+'  box-shadow: 0 6px 20px rgba(0,0,0,.07);\n' +
+'  transition: transform .2s;\n' +
+'}\n' +
+'.card:hover { transform: translateY(-4px); }\n' +
+'.card h3 { margin: 0 0 8px; color: #4f46e5; font-size: 1rem; }\n' +
+'.card p { margin: 0; color: #666; font-size: .88rem; }',
+      solutionHtml:
+'<h2>Nos services</h2>\n' +
+'<div class="grille">\n' +
+'  <article class="card"><h3>Design</h3><p>Interfaces modernes et accessibles.</p></article>\n' +
+'  <article class="card"><h3>Développement</h3><p>Sites rapides et sur mesure.</p></article>\n' +
+'  <article class="card"><h3>SEO</h3><p>Visibilité sur les moteurs de recherche.</p></article>\n' +
+'</div>',
+      solutionCss:
+'body { font-family: system-ui, sans-serif; padding: 24px; background: #eef2f7; }\n' +
+'h2 { color: #1e293b; }\n' +
+'.grille {\n' +
+'  display: grid;\n' +
+'  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));\n' +
+'  gap: 16px;\n' +
+'  margin-top: 14px;\n' +
+'}\n' +
+'.card {\n' +
+'  background: #fff;\n' +
+'  padding: 22px;\n' +
+'  border-radius: 14px;\n' +
+'  box-shadow: 0 6px 20px rgba(0,0,0,.07);\n' +
+'  transition: transform .2s;\n' +
+'}\n' +
+'.card:hover { transform: translateY(-4px); }\n' +
+'.card h3 { margin: 0 0 8px; color: #4f46e5; font-size: 1rem; }\n' +
+'.card p { margin: 0; color: #666; font-size: .88rem; }'
+    },
+
+    {
+      id: 'ex4',
+      titre: '4 · Formulaire de contact accessible',
+      consigne: 'Créez un <b>formulaire de contact</b> avec : un champ nom, un champ e-mail, un menu déroulant de sujet, une zone de texte et un bouton. Chaque champ doit avoir un <code>&lt;label&gt;</code> correctement lié via <code>for</code>/<code>id</code>.',
+      hint: 'Chaque <code>&lt;input&gt;</code> doit avoir un <code>id</code> et un <code>&lt;label for="..."&gt;</code> correspondant. Utilisez <code>type="email"</code> pour valider l\'adresse automatiquement.',
+      html:
+'<form class="contact">\n' +
+'  <h2>Contactez-nous</h2>\n' +
+'\n' +
+'  <label for="nom">Nom</label>\n' +
+'  <input type="text" id="nom" placeholder="Votre nom">\n' +
+'\n' +
+'  <label for="email">E-mail</label>\n' +
+'  <input type="email" id="email" placeholder="vous@exemple.com">\n' +
+'\n' +
+'  <label for="sujet">Sujet</label>\n' +
+'  <select id="sujet">\n' +
+'    <option>Demande d\'information</option>\n' +
+'    <option>Devis</option>\n' +
+'    <option>Support</option>\n' +
+'  </select>\n' +
+'\n' +
+'  <label for="msg">Message</label>\n' +
+'  <textarea id="msg" rows="4" placeholder="Votre message..."></textarea>\n' +
+'\n' +
+'  <button type="submit">Envoyer</button>\n' +
+'</form>',
+      css:
+'body { font-family: system-ui, sans-serif; background: #eef2f7; padding: 30px 16px; }\n' +
+'.contact {\n' +
+'  max-width: 440px;\n' +
+'  margin: auto;\n' +
+'  background: #fff;\n' +
+'  padding: 28px;\n' +
+'  border-radius: 16px;\n' +
+'  box-shadow: 0 12px 32px rgba(0,0,0,.09);\n' +
+'  display: flex;\n' +
+'  flex-direction: column;\n' +
+'  gap: 6px;\n' +
+'}\n' +
+'.contact h2 { margin: 0 0 12px; color: #1e293b; font-size: 1.3rem; }\n' +
+'.contact label {\n' +
+'  font-size: .78rem;\n' +
+'  font-weight: 700;\n' +
+'  text-transform: uppercase;\n' +
+'  letter-spacing: .06em;\n' +
+'  color: #4f46e5;\n' +
+'  margin-top: 10px;\n' +
+'}\n' +
+'.contact input, .contact select, .contact textarea {\n' +
+'  padding: 11px 14px;\n' +
+'  border: 1px solid #dfe2ee;\n' +
+'  border-radius: 10px;\n' +
+'  font-family: inherit;\n' +
+'  font-size: .92rem;\n' +
+'  outline: none;\n' +
+'  transition: .2s;\n' +
+'}\n' +
+'.contact input:focus, .contact select:focus, .contact textarea:focus {\n' +
+'  border-color: #4f46e5;\n' +
+'  box-shadow: 0 0 0 3px rgba(79,70,229,.14);\n' +
+'}\n' +
+'.contact button {\n' +
+'  margin-top: 18px;\n' +
+'  padding: 13px;\n' +
+'  border: none;\n' +
+'  border-radius: 10px;\n' +
+'  background: linear-gradient(120deg,#4f46e5,#7c3aed);\n' +
+'  color: #fff;\n' +
+'  font-family: inherit;\n' +
+'  font-weight: 700;\n' +
+'  font-size: .95rem;\n' +
+'  cursor: pointer;\n' +
+'  transition: .2s;\n' +
+'}\n' +
+'.contact button:hover { transform: translateY(-2px); box-shadow: 0 12px 24px -10px #4f46e5; }',
+      solutionHtml:
+'<form class="contact">\n' +
+'  <h2>Contactez-nous</h2>\n' +
+'\n' +
+'  <label for="nom">Nom</label>\n' +
+'  <input type="text" id="nom" placeholder="Votre nom">\n' +
+'\n' +
+'  <label for="email">E-mail</label>\n' +
+'  <input type="email" id="email" placeholder="vous@exemple.com">\n' +
+'\n' +
+'  <label for="sujet">Sujet</label>\n' +
+'  <select id="sujet">\n' +
+'    <option>Demande d\'information</option>\n' +
+'    <option>Devis</option>\n' +
+'    <option>Support</option>\n' +
+'  </select>\n' +
+'\n' +
+'  <label for="msg">Message</label>\n' +
+'  <textarea id="msg" rows="4" placeholder="Votre message..."></textarea>\n' +
+'\n' +
+'  <button type="submit">Envoyer</button>\n' +
+'</form>',
+      solutionCss:
+'/* Solution identique — voir HTML ci-contre */'
+    },
+
+    {
+      id: 'ex5',
+      titre: '5 · Barres de compétences animées',
+      consigne: 'Créez trois barres de compétences : un rail gris et une partie colorée dont la largeur varie. Ajoutez une <b>animation</b> qui fait démarrer chaque barre à 0 puis les remplit progressivement.',
+      hint: 'Utilisez <code>@keyframes</code> avec <code>transform: scaleX(0)</code> au départ, <code>transform-origin: left</code>, et <code>animation: remplir 1s both</code>. Le rail reçoit <code>overflow: hidden</code>.',
+      html:
+'<h2>Mes compétences</h2>\n' +
+'<div class="skill">\n' +
+'  <span>Marketing digital</span>\n' +
+'  <div class="bar"><div class="fill" style="--niveau:90%"></div></div>\n' +
+'</div>\n' +
+'<div class="skill">\n' +
+'  <span>Réseaux sociaux</span>\n' +
+'  <div class="bar"><div class="fill" style="--niveau:75%"></div></div>\n' +
+'</div>\n' +
+'<div class="skill">\n' +
+'  <span>HTML &amp; CSS</span>\n' +
+'  <div class="bar"><div class="fill" style="--niveau:60%"></div></div>\n' +
+'</div>',
+      css:
+'body { font-family: system-ui, sans-serif; padding: 30px; background: #eef2f7; color: #1e293b; }\n' +
+'h2 { font-size: 1.15rem; }\n' +
+'.skill { margin-bottom: 18px; }\n' +
+'.skill > span { display: block; font-weight: 600; font-size: .9rem; margin-bottom: 7px; }\n' +
+'.bar {\n' +
+'  height: 10px;\n' +
+'  background: #e2e8f0;\n' +
+'  border-radius: 100px;\n' +
+'  overflow: hidden;\n' +
+'}\n' +
+'.fill {\n' +
+'  height: 100%;\n' +
+'  width: var(--niveau);\n' +
+'  border-radius: 100px;\n' +
+'  background: linear-gradient(90deg, #4f46e5, #06b6d4);\n' +
+'  transform-origin: left;\n' +
+'  animation: remplir 1.2s cubic-bezier(.4,0,.2,1) both;\n' +
+'}\n' +
+'@keyframes remplir {\n' +
+'  from { transform: scaleX(0); }\n' +
+'  to   { transform: scaleX(1); }\n' +
+'}',
+      solutionHtml:
+'<h2>Mes compétences</h2>\n' +
+'<div class="skill">\n' +
+'  <span>Marketing digital</span>\n' +
+'  <div class="bar"><div class="fill" style="--niveau:90%"></div></div>\n' +
+'</div>\n' +
+'<div class="skill">\n' +
+'  <span>Réseaux sociaux</span>\n' +
+'  <div class="bar"><div class="fill" style="--niveau:75%"></div></div>\n' +
+'</div>\n' +
+'<div class="skill">\n' +
+'  <span>HTML &amp; CSS</span>\n' +
+'  <div class="bar"><div class="fill" style="--niveau:60%"></div></div>\n' +
+'</div>',
+      solutionCss:
+'.fill { animation: remplir 1.2s cubic-bezier(.4,0,.2,1) both; }\n' +
+'@keyframes remplir {\n' +
+'  from { transform: scaleX(0); }\n' +
+'  to   { transform: scaleX(1); }\n' +
+'}'
+    },
+
+    {
+      id: 'ex6',
+      titre: '6 · Carte responsive (défi libre)',
+      consigne: 'Reproduisez <b>une carte produit</b> (image, titre, prix, bouton) qui s\'affiche en pleine largeur sur mobile et en deux colonnes sur desktop. Utilisez <code>@media</code> et un layout en <code>flex</code> ou <code>grid</code>. Ce dernier exercice est plus ouvert : soyez créatif !',
+      hint: 'Commencez mobile-first : <code>flex-direction: column</code>. Puis dans <code>@media (min-width: 700px)</code>, passez à <code>flex-direction: row</code> avec <code>align-items: center</code>.',
+      html:
+'<article class="produit">\n' +
+'  <img src="https://picsum.photos/300/200?random=1" alt="Produit">\n' +
+'  <div class="infos">\n' +
+'    <h3>Sac en cuir artisanal</h3>\n' +
+'    <p>Fabriqué à la main, cuir pleine fleur, disponible en trois teintes.</p>\n' +
+'    <span class="prix">490 DH</span>\n' +
+'    <button>Ajouter au panier</button>\n' +
+'  </div>\n' +
+'</article>',
+      css:
+'body { font-family: system-ui, sans-serif; padding: 30px 16px; background: #eef2f7; }\n' +
+'.produit {\n' +
+'  max-width: 720px;\n' +
+'  margin: auto;\n' +
+'  background: #fff;\n' +
+'  border-radius: 18px;\n' +
+'  overflow: hidden;\n' +
+'  box-shadow: 0 16px 40px rgba(0,0,0,.10);\n' +
+'  display: flex;\n' +
+'  flex-direction: column;\n' +
+'}\n' +
+'.produit img { width: 100%; height: 220px; object-fit: cover; }\n' +
+'.infos { padding: 24px; }\n' +
+'.infos h3 { margin: 0 0 8px; font-size: 1.15rem; color: #1e293b; }\n' +
+'.infos p { margin: 0 0 16px; color: #666; font-size: .9rem; }\n' +
+'.prix {\n' +
+'  display: inline-block;\n' +
+'  font-size: 1.3rem;\n' +
+'  font-weight: 800;\n' +
+'  color: #4f46e5;\n' +
+'  margin-right: 14px;\n' +
+'}\n' +
+'.infos button {\n' +
+'  padding: 11px 22px;\n' +
+'  border: none;\n' +
+'  border-radius: 10px;\n' +
+'  background: linear-gradient(120deg,#4f46e5,#7c3aed);\n' +
+'  color: #fff;\n' +
+'  font-family: inherit;\n' +
+'  font-weight: 700;\n' +
+'  cursor: pointer;\n' +
+'}\n' +
+'@media (min-width: 700px) {\n' +
+'  .produit { flex-direction: row; align-items: stretch; }\n' +
+'  .produit img { width: 45%; height: auto; }\n' +
+'  .infos { display: flex; flex-direction: column; justify-content: center; }\n' +
+'}',
+      solutionHtml:
+'<article class="produit">\n' +
+'  <img src="https://picsum.photos/300/200?random=1" alt="Produit">\n' +
+'  <div class="infos">\n' +
+'    <h3>Sac en cuir artisanal</h3>\n' +
+'    <p>Fabriqué à la main, cuir pleine fleur, disponible en trois teintes.</p>\n' +
+'    <span class="prix">490 DH</span>\n' +
+'    <button>Ajouter au panier</button>\n' +
+'  </div>\n' +
+'</article>',
+      solutionCss:
+'.produit { display: flex; flex-direction: column; }\n' +
+'@media (min-width: 700px) {\n' +
+'  .produit { flex-direction: row; align-items: stretch; }\n' +
+'  .produit img { width: 45%; height: auto; }\n' +
+'}'
+    }
+  ];
+
+  /* =====================================================
+     RÉFÉRENCES DOM
+  ===================================================== */
+  var sel = document.getElementById('lcsSelect');
+  var ta = document.getElementById('lcsCode');
+  var fr = document.getElementById('lcsFrame');
+  var consigne = document.getElementById('lcsConsigne');
+  var status = document.getElementById('lcsStatus');
+  var info = document.getElementById('lcsInfo');
+  var comparePanel = document.getElementById('lcsComparePanel');
+  var yourCodeEl = document.getElementById('lcsYourCode');
+  var solCodeEl = document.getElementById('lcsSolutionCode');
+  var tabs = document.querySelectorAll('.lcs-tab');
+  if(!sel || !ta) return;
+
+  var currentEx = EXERCISES[0];
+  var currentLang = 'html';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e){ saved = {}; }
+  var dirtyTimer;
+
+  /* =====================================================
+     CONSTRUCTION DOC
+  ===================================================== */
+  function buildDoc(html, css){
+    return '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+      '<style>' + css + '</style></head><body>' + html + '</body></html>';
+  }
+
+  /* =====================================================
+     SAUVEGARDE
+  ===================================================== */
+  function saveDebounced(){
+    status.textContent = '⏳ Modification...';
+    status.classList.add('dirty');
+    clearTimeout(dirtyTimer);
+    dirtyTimer = setTimeout(function(){
+      save();
+      status.textContent = '✓ Sauvegardé';
+      status.classList.remove('dirty');
+    }, 600);
+  }
+
+  function save(){
+    var ex = saved[currentEx.id] || (saved[currentEx.id] = {});
+    ex[currentLang] = ta.value;
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch(e){}
+  }
+
+  /* =====================================================
+     AFFICHAGE
+  ===================================================== */
+  function loadExercise(id){
+    currentEx = EXERCISES.find(function(e){ return e.id === id; }) || EXERCISES[0];
+    var stored = saved[currentEx.id] || {};
+
+    // Charge le code sauvegardé OU le code de départ
+    var html = stored.html !== undefined ? stored.html : currentEx.html;
+    var css  = stored.css  !== undefined ? stored.css  : currentEx.css;
+
+    // Stocke les deux versions en mémoire
+    saved[currentEx.id] = { html: html, css: css };
+
+    consigne.innerHTML = '<b>🎯 Consigne :</b> ' + currentEx.consigne;
+    showLang(currentLang);
+    render();
+    updateInfo();
+  }
+
+  function showLang(lang){
+    currentLang = lang;
+    tabs.forEach(function(t){ t.classList.toggle('active', t.dataset.lang === lang); });
+    var stored = saved[currentEx.id] || {};
+    ta.value = stored[lang] !== undefined ? stored[lang] : (lang === 'html' ? currentEx.html : currentEx.css);
+  }
+
+  function render(){
+    var stored = saved[currentEx.id] || {};
+    var html = stored.html || '';
+    var css  = stored.css  || '';
+    fr.srcdoc = buildDoc(html, css);
+    updateInfo();
+  }
+
+  function updateInfo(){
+    info.textContent = ta.value.length + ' caractères · ' + (ta.value.split('\n').length) + ' lignes';
+  }
+
+  /* =====================================================
+     ÉCOUTEURS
+  ===================================================== */
+  // Remplir le select
+  EXERCISES.forEach(function(ex){
+    var o = document.createElement('option');
+    o.value = ex.id;
+    o.textContent = ex.titre;
+    sel.appendChild(o);
+  });
+
+  sel.addEventListener('change', function(){
+    save();
+    loadExercise(sel.value);
+  });
+
+  // Onglets HTML / CSS
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      save();
+      showLang(t.dataset.lang);
+      ta.focus();
+    });
+  });
+
+  // Frappe dans le textarea
+  ta.addEventListener('input', function(){
+    var stored = saved[currentEx.id] || (saved[currentEx.id] = {});
+    stored[currentLang] = ta.value;
+    saveDebounced();
+    // Debounce sur le rendu aussi
+    clearTimeout(ta._rt);
+    ta._rt = setTimeout(render, 300);
+    updateInfo();
+  });
+
+  // Tab = 2 espaces
+  ta.addEventListener('keydown', function(e){
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      var s = ta.selectionStart, en = ta.selectionEnd;
+      ta.value = ta.value.substring(0, s) + '  ' + ta.value.substring(en);
+      ta.selectionStart = ta.selectionEnd = s + 2;
+      var stored = saved[currentEx.id] || (saved[currentEx.id] = {});
+      stored[currentLang] = ta.value;
+      saveDebounced();
+    }
+    // Ctrl + Entrée = forcer le rendu
+    if (e.ctrlKey && e.key === 'Enter') {
+      e.preventDefault();
+      render();
+      status.textContent = '✓ Rendu forcé';
+      status.classList.remove('dirty');
+    }
+  });
+
+  // Indice
+  document.getElementById('lcsHint').addEventListener('click', function(){
+    alert('💡 INDICE\n\n' + currentEx.hint.replace(/<\/?[^>]+>/g, ''));
+  });
+
+  // Comparer
+  document.getElementById('lcsCompare').addEventListener('click', function(){
+    save();
+    var stored = saved[currentEx.id] || {};
+    yourCodeEl.textContent = '/* HTML */\n' + (stored.html || '') +
+      '\n\n/* CSS */\n' + (stored.css || '');
+    solCodeEl.textContent = '/* HTML */\n' + currentEx.solutionHtml +
+      '\n\n/* CSS */\n' + currentEx.solutionCss;
+    comparePanel.hidden = false;
+    comparePanel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+
+  document.getElementById('lcsCloseCompare').addEventListener('click', function(){
+    comparePanel.hidden = true;
+  });
+
+  // Réinitialiser
+  document.getElementById('lcsReset').addEventListener('click', function(){
+    if(!confirm('Effacer vos modifications et revenir au code de départ ?')) return;
+    saved[currentEx.id] = { html: currentEx.html, css: currentEx.css };
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch(e){}
+    showLang(currentLang);
+    render();
+    status.textContent = '✓ Réinitialisé';
+    status.classList.remove('dirty');
+  });
+
+  // Switch device
+  document.querySelectorAll('.lcs-devices .dev-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.lcs-devices .dev-btn').forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      fr.style.width = b.dataset.w;
+    });
+  });
+
+  // Libellé de la consigne depuis le select
+  loadExercise(EXERCISES[0].id);
+})();
+</script>
+  
 </body>
 </html>
