@@ -85,6 +85,7 @@ nav.topnav{position:sticky;top:0;z-index:150;background:color-mix(in srgb,var(--
 .nav-link{padding:8px 13px;border-radius:9px;font-size:.85rem;font-weight:600;color:var(--muted);
   text-decoration:none;white-space:nowrap;transition:.18s}
 .nav-link:hover{color:var(--text);background:var(--surface-2)}
+.nav-link.active{color:var(--primary);background:var(--primary-soft)}
 .theme-btn{width:37px;height:37px;flex:none;border-radius:11px;border:1px solid var(--border);
   background:var(--surface);cursor:pointer;font-size:1rem;display:grid;place-items:center;
   transition:.18s;color:var(--text)}
@@ -149,14 +150,12 @@ nav.topnav{position:sticky;top:0;z-index:150;background:color-mix(in srgb,var(--
 .panel-body p:last-child{margin-bottom:0}
 .panel-body strong{color:var(--text);font-weight:700}
 
-/* analogies */
 ul.analogie{list-style:none;padding:0;margin:14px 0;display:grid;gap:8px}
 ul.analogie li{position:relative;padding:11px 14px 11px 42px;background:var(--surface-2);
   border-radius:11px;font-size:.9rem;color:var(--muted);border-left:3px solid var(--primary)}
 ul.analogie li::before{content:"🏠";position:absolute;left:14px;top:11px;font-size:.95rem}
 ul.analogie li b{color:var(--text)}
 
-/* code */
 .code-block{position:relative;background:var(--code-bg);border-radius:12px;margin:0;
   padding:18px 20px;overflow-x:auto;font-family:'JetBrains Mono',ui-monospace,monospace;
   font-size:.79rem;line-height:1.75;color:var(--code-text);border:1px solid rgba(255,255,255,.07)}
@@ -181,7 +180,6 @@ ul.analogie li b{color:var(--text)}
 .mini-btn.on{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff;border-color:transparent}
 .mini-btn.on:hover{color:#fff}
 
-/* tags discovered */
 .tag-chips{display:flex;flex-wrap:wrap;gap:8px}
 .tag-chip{display:inline-flex;flex-direction:column;gap:3px;background:var(--surface-2);
   border:1px solid var(--border);border-radius:11px;padding:9px 13px;max-width:100%;
@@ -191,7 +189,6 @@ ul.analogie li b{color:var(--text)}
   color:var(--primary);background:none;padding:0}
 .tag-chip span{font-size:.75rem;color:var(--muted);line-height:1.4}
 
-/* defi */
 .defi{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.04));
   border:1px solid rgba(245,158,11,.3);border-radius:12px;padding:16px 18px;font-size:.9rem;
   color:var(--text);display:flex;gap:12px;align-items:flex-start}
@@ -199,7 +196,6 @@ ul.analogie li b{color:var(--text)}
 .defi b{color:#b45309}
 [data-theme="dark"] .defi b{color:#fbbf24}
 
-/* quiz */
 .quiz-box{background:var(--surface-2);border-radius:12px;padding:18px 20px;border:1px solid var(--border)}
 .quiz-q{font-weight:700;font-size:.94rem;margin:0 0 14px;display:flex;gap:9px}
 .quiz-q .qn{color:var(--primary);font-weight:800;flex:none}
@@ -216,7 +212,6 @@ ul.analogie li b{color:var(--text)}
 .quiz-fb.show{display:block;animation:fade .3s}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-/* ---------- PREVIEW ---------- */
 .preview-panel{position:sticky;top:76px;background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
 @media(max-width:1240px){.preview-panel{position:static}}
@@ -242,7 +237,6 @@ ul.analogie li b{color:var(--text)}
 .preview-empty b{display:block;font-size:1.5rem;margin-bottom:8px}
 .preview-wrap{position:relative;width:100%;display:flex;justify-content:center}
 
-/* ---------- PROGRESS ---------- */
 .progress-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
   padding:18px 22px;box-shadow:var(--shadow);margin-bottom:20px}
 .progress-top{display:flex;justify-content:space-between;align-items:center;gap:14px;
@@ -257,23 +251,10 @@ ul.analogie li b{color:var(--text)}
   background:var(--primary-soft);color:var(--primary);padding:4px 10px;border-radius:7px;
   animation:fade .35s}
 
-/* ---------- NAV BUTTONS ---------- */
 .step-nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;
   margin-top:18px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius);box-shadow:var(--shadow)}
 .nav-btns{display:flex;gap:10px;flex-wrap:wrap}
-
-/* ---------- SANDBOX ---------- */
-.sandbox{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  box-shadow:var(--shadow);overflow:hidden;margin-top:26px}
-.sb-body{display:grid;grid-template-columns:1fr 1fr;min-height:420px}
-@media(max-width:900px){.sb-body{grid-template-columns:1fr}}
-.sb-body textarea{width:100%;height:100%;min-height:420px;border:none;outline:none;resize:none;
-  background:var(--code-bg);color:var(--code-text);font-family:'JetBrains Mono',ui-monospace,monospace;
-  font-size:.78rem;line-height:1.7;padding:18px;tab-size:2}
-.sb-body iframe{width:100%;height:100%;min-height:420px;border:none;background:#fff;
-  border-left:1px solid var(--border)}
-@media(max-width:900px){.sb-body iframe{border-left:none;border-top:1px solid var(--border)}}
 
 /* ---------- SECTION HEAD ---------- */
 .sec{padding:60px 0 20px}
@@ -298,6 +279,107 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   cursor:pointer;box-shadow:var(--shadow-lg);opacity:0;pointer-events:none;transition:.28s;z-index:90}
 #totop.show{opacity:1;pointer-events:auto}
 #totop:hover{transform:translateY(-4px)}
+
+/* ---------- PLAYGROUND UNIFIÉ ---------- */
+.pg{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden}
+.pg-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 20px;
+  background:var(--surface-2);border-bottom:1px solid var(--border)}
+.pg-cat{display:flex;align-items:center;gap:10px;margin-right:auto}
+.pg-cat label{font-size:.82rem;font-weight:700;color:var(--muted);white-space:nowrap}
+.pg-cat select{padding:9px 13px;border-radius:10px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);font-family:inherit;font-size:.87rem;
+  font-weight:600;cursor:pointer;min-width:300px;max-width:100%}
+.pg-actions{display:flex;gap:7px;flex-wrap:wrap}
+.mini-btn.run{background:linear-gradient(120deg,var(--primary),var(--primary-2));
+  color:#fff;border-color:transparent}
+.mini-btn.run:hover{color:#fff;opacity:.92}
+.pg-desc{padding:14px 22px;background:var(--primary-soft);border-bottom:1px solid var(--border);
+  font-size:.9rem;color:var(--text);line-height:1.6}
+.pg-desc b{color:var(--primary)}
+.pg-body{display:grid;grid-template-columns:1fr 1fr;min-height:480px}
+@media(max-width:900px){.pg-body{grid-template-columns:1fr}}
+.pg-editor{display:flex;flex-direction:column;background:var(--code-bg)}
+.pg-tabs{display:flex;align-items:center;gap:4px;padding:8px 12px;
+  background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07)}
+.pg-tab{padding:6px 16px;border-radius:7px;border:none;background:transparent;
+  color:#94a3b8;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;transition:.15s}
+.pg-tab:hover{color:#e2e8f0}
+.pg-tab.active{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff}
+.pg-status{margin-left:auto;font-size:.72rem;color:#86efac;font-weight:600;transition:.2s}
+.pg-status.dirty{color:#fbbf24}
+#pgCode{flex:1;width:100%;min-height:440px;border:none;outline:none;resize:none;
+  background:var(--code-bg);color:var(--code-text);font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:.82rem;line-height:1.75;padding:18px;tab-size:2}
+.pg-preview-wrap{display:flex;flex-direction:column;border-left:1px solid var(--border)}
+@media(max-width:900px){.pg-preview-wrap{border-left:none;border-top:1px solid var(--border)}}
+.pg-preview-head{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--border);flex-wrap:wrap;gap:8px}
+.pg-devices{display:flex;gap:3px;background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:2px}
+.pg-devices .dev-btn{border:none;background:none;padding:5px 10px;border-radius:6px;
+  font-size:.72rem;font-weight:700;color:var(--muted);cursor:pointer;font-family:inherit;transition:.15s}
+.pg-devices .dev-btn.active{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff}
+.pg-preview-stage{flex:1;display:flex;justify-content:center;padding:14px;
+  background:repeating-conic-gradient(var(--surface-3) 0% 25%, transparent 0% 50%) 50%/18px 18px;
+  overflow:auto}
+#pgFrame{width:100%;height:100%;min-height:440px;border:none;background:#fff;
+  border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.14);transition:width .35s}
+.pg-foot{display:flex;justify-content:space-between;align-items:center;padding:9px 20px;
+  background:var(--surface-2);border-top:1px solid var(--border);font-size:.74rem;
+  color:var(--muted);font-weight:600;flex-wrap:wrap;gap:8px}
+
+/* ---------- LIVE CODING STUDIO ---------- */
+.lcs{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden}
+.lcs-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 20px;
+  background:var(--surface-2);border-bottom:1px solid var(--border)}
+.lcs-ex{display:flex;align-items:center;gap:10px;margin-right:auto}
+.lcs-ex label{font-size:.82rem;font-weight:700;color:var(--muted)}
+.lcs-ex select{padding:8px 12px;border-radius:10px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);font-family:inherit;font-size:.86rem;
+  font-weight:600;cursor:pointer;min-width:240px}
+.lcs-actions{display:flex;gap:8px;flex-wrap:wrap}
+.lcs-consigne{padding:16px 22px;background:var(--primary-soft);border-bottom:1px solid var(--border);
+  font-size:.9rem;color:var(--text);line-height:1.6}
+.lcs-consigne b{color:var(--primary)}
+.lcs-body{display:grid;grid-template-columns:1fr 1fr;min-height:460px}
+@media(max-width:900px){.lcs-body{grid-template-columns:1fr}}
+.lcs-editor{display:flex;flex-direction:column;background:var(--code-bg)}
+.lcs-tabs{display:flex;align-items:center;gap:4px;padding:8px 12px;
+  background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07)}
+.lcs-tab{padding:6px 14px;border-radius:7px;border:none;background:transparent;
+  color:#94a3b8;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;transition:.15s}
+.lcs-tab:hover{color:#e2e8f0}
+.lcs-tab.active{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff}
+.lcs-status{margin-left:auto;font-size:.72rem;color:#86efac;font-weight:600;transition:.2s}
+.lcs-status.dirty{color:#fbbf24}
+#lcsCode{flex:1;width:100%;min-height:400px;border:none;outline:none;resize:none;
+  background:var(--code-bg);color:var(--code-text);font-family:'JetBrains Mono',ui-monospace,monospace;
+  font-size:.82rem;line-height:1.75;padding:18px;tab-size:2}
+.lcs-preview-wrap{display:flex;flex-direction:column;border-left:1px solid var(--border)}
+@media(max-width:900px){.lcs-preview-wrap{border-left:none;border-top:1px solid var(--border)}}
+.lcs-preview-head{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--border)}
+.lcs-devices{display:flex;gap:3px;background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;padding:2px}
+.lcs-devices .dev-btn{border:none;background:none;padding:5px 10px;border-radius:6px;
+  font-size:.75rem;cursor:pointer;font-family:inherit;transition:.15s}
+.lcs-devices .dev-btn.active{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff}
+.lcs-preview-stage{flex:1;display:flex;justify-content:center;padding:14px;
+  background:repeating-conic-gradient(var(--surface-3) 0% 25%, transparent 0% 50%) 50%/18px 18px;
+  overflow:auto}
+#lcsFrame{width:100%;height:100%;min-height:400px;border:none;background:#fff;
+  border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.14);transition:width .35s}
+.lcs-foot{display:flex;justify-content:space-between;align-items:center;padding:9px 20px;
+  background:var(--surface-2);border-top:1px solid var(--border);font-size:.74rem;
+  color:var(--muted);font-weight:600}
+.lcs-compare{border-top:1px solid var(--border);background:var(--surface-2)}
+.lcs-compare-head{display:flex;align-items:center;gap:12px;padding:12px 20px;
+  border-bottom:1px solid var(--border)}
+.lcs-compare-body{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 20px}
+@media(max-width:760px){.lcs-compare-body{grid-template-columns:1fr}}
+.lcs-compare-body pre{max-height:280px;overflow:auto}
 </style>
 </head>
 <body>
@@ -311,11 +393,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     <h1>Construisons ensemble<br><span class="grad">une page CV</span></h1>
     <p class="lead">
       Un atelier en <strong>18 étapes</strong> où vous découvrez chaque balise HTML en construisant réellement
-      votre CV, puis vous le mettez en forme avec CSS3. Aperçu live, quiz, défis et bac à sable à la fin.
+      votre CV, puis vous le mettez en forme avec CSS3. Aperçu live, quiz, défis et playground à la fin.
     </p>
     <div class="hero-actions">
       <a href="#atelier" class="btn btn-primary">🎬 Démarrer l'atelier</a>
-      <a href="#bac" class="btn btn-ghost">🧪 Aller au bac à sable</a>
+      <a href="#playground" class="btn btn-ghost">🛠️ Aller au playground</a>
     </div>
   </div>
 </header>
@@ -324,9 +406,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
 <nav class="topnav">
   <div class="nav-inner">
     <span class="nav-brand"><span class="mark">CV</span> Atelier HTML &amp; CSS</span>
-    <a href="#atelier" class="nav-link">Atelier guidé</a>
-    <a href="#bac" class="nav-link">Bac à sable</a>
-    <a href="#memo" class="nav-link">Mémo final</a>
+    <a href="#atelier" class="nav-link active">🎬 Atelier guidé</a>
+    <a href="#playground" class="nav-link">🛠️ Playground</a>
+    <a href="#studio" class="nav-link">🧪 Live Studio</a>
+    <a href="#memo" class="nav-link">📖 Mémo</a>
     <button class="theme-btn" id="themeBtn" title="Basculer le thème">🌙</button>
   </div>
 </nav>
@@ -346,7 +429,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
       </p>
     </div>
 
-    <!-- Progression -->
     <div class="progress-wrap">
       <div class="progress-top">
         <b>🚀 Votre progression</b>
@@ -357,17 +439,13 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
     </div>
 
     <div class="workshop">
-
-      <!-- STEPPER -->
       <aside class="stepper" id="stepper"></aside>
 
-      <!-- STAGE -->
       <div class="stage">
         <div class="stage-head" id="stageHead"></div>
         <div class="stage-body">
           <div class="col-left" id="colLeft"></div>
 
-          <!-- PREVIEW -->
           <div class="preview-panel">
             <div class="preview-head">
               <span class="preview-dots"><i></i><i></i><i></i></span>
@@ -396,7 +474,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           </div>
         </div>
 
-        <!-- NAV -->
         <div class="step-nav">
           <button class="mini-btn" id="prevBtn">← Étape précédente</button>
           <div class="nav-btns">
@@ -405,7 +482,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="note" style="margin-top:26px">
@@ -416,29 +492,63 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   </div>
 </section>
 
-<!-- ================= BAC À SABLE ================= -->
-<section class="sec" id="bac">
+<!-- ================= PLAYGROUND UNIFIÉ ================= -->
+<section class="sec" id="playground">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">Espace libre</span>
-      <h2 class="sec-title">Bac à sable — modifiez tout</h2>
+      <span class="eyebrow">Zone d'expérimentation · 18 exemples</span>
+      <h2 class="sec-title">Playground — modifiez, exécutez, comprenez</h2>
       <p class="sec-sub">
-        Voici le code complet du CV. Changez les couleurs, les textes, ajoutez des sections…
-        L'aperçu se met à jour automatiquement. Téléchargez ensuite votre version.
+        Un seul éditeur, tous les exemples : choisissez une catégorie dans le menu déroulant,
+        modifiez le code à gauche et observez le rendu à droite. Chaque exemple est sauvegardé
+        automatiquement dans votre navigateur.
       </p>
     </div>
 
-    <div class="sandbox">
-      <div class="preview-head">
-        <span class="preview-dots"><i></i><i></i><i></i></span>
-        <span style="font-size:.82rem;font-weight:600;color:var(--muted);margin-right:auto">cv-complet.html</span>
-        <button class="mini-btn" id="sbCopy">⧉ Copier</button>
-        <button class="mini-btn" id="sbDownload">⬇️ Télécharger</button>
-        <button class="mini-btn" id="sbReset">↺ Réinitialiser</button>
+    <div class="pg">
+      <div class="pg-head">
+        <div class="pg-cat">
+          <label for="pgSelect">📚 Exemple :</label>
+          <select id="pgSelect"></select>
+        </div>
+        <div class="pg-actions">
+          <button class="mini-btn run" id="pgRun">▶ Exécuter</button>
+          <button class="mini-btn" id="pgCopy">⧉ Copier</button>
+          <button class="mini-btn" id="pgDownload">⬇️ Télécharger</button>
+          <button class="mini-btn" id="pgReset">↺ Réinitialiser</button>
+        </div>
       </div>
-      <div class="sb-body">
-        <textarea id="sbCode" spellcheck="false"></textarea>
-        <iframe id="sbFrame" title="Bac à sable"></iframe>
+
+      <div class="pg-desc" id="pgDesc"></div>
+
+      <div class="pg-body">
+        <div class="pg-editor">
+          <div class="pg-tabs">
+            <button class="pg-tab active" data-lang="html">HTML</button>
+            <button class="pg-tab" data-lang="css">CSS</button>
+            <span class="pg-status" id="pgStatus">✓ Sauvegardé</span>
+          </div>
+          <textarea id="pgCode" spellcheck="false"></textarea>
+        </div>
+
+        <div class="pg-preview-wrap">
+          <div class="pg-preview-head">
+            <span style="font-size:.78rem;font-weight:700;color:var(--muted)">APERÇU EN DIRECT</span>
+            <div class="pg-devices">
+              <button class="dev-btn active" data-w="100%">🖥️ PC</button>
+              <button class="dev-btn" data-w="768px">📱 Tab</button>
+              <button class="dev-btn" data-w="390px">📞 Mobile</button>
+            </div>
+          </div>
+          <div class="pg-preview-stage">
+            <iframe id="pgFrame" title="Aperçu Playground"></iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="pg-foot">
+        <span id="pgInfo">0 caractère</span>
+        <span id="pgHint">💡 Utilisez Ctrl + Entrée pour forcer l'exécution</span>
       </div>
     </div>
   </div>
@@ -464,7 +574,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
   <div class="wrap foot-inner">
     <div><b>Atelier — Créer un CV en HTML5 &amp; CSS3</b><br>Module Création de sites web &amp; Référencement</div>
     <div style="text-align:right">
-      18 étapes · 2 éditeurs live<br>
+      18 étapes · Playground · Live Studio<br>
       <span style="font-size:.8rem">Méthode « construire pour comprendre »</span>
     </div>
   </div>
@@ -511,7 +621,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:40px
    FRAGMENTS HTML DU CV
 ============================================================ */
 var F = {
-
   headerSimple:
 `<header class="cv-header">
   <h1>Salma Bennani</h1>
@@ -642,7 +751,6 @@ var F = {
 `<footer class="cv-footer">
   <p>CV mis à jour en <time datetime="2026-10">octobre 2026</time> · <a href="#">salmabennani.ma</a></p>
 </footer>`
-
 };
 
 var ORDER_ALL = ['headerFull','contact','profil','experience','formation','competences','langues','footer'];
@@ -651,8 +759,6 @@ var ORDER_ALL = ['headerFull','contact','profil','experience','formation','compe
    CSS PROGRESSIF
 ============================================================ */
 var CSS_PARTS = [
-
-/* 0 — variables & base */
 `:root{
   --primaire:#1e3a8a;
   --primaire-clair:#2563eb;
@@ -676,7 +782,6 @@ body{
   -webkit-font-smoothing:antialiased;
 }`,
 
-/* 1 — la carte */
 `.cv{
   max-width:820px;
   margin:0 auto;
@@ -686,7 +791,6 @@ body{
   box-shadow:0 24px 60px -28px rgba(30,58,138,.5);
 }`,
 
-/* 2 — en-tête flexbox */
 `.cv-header{
   display:flex;
   align-items:center;
@@ -718,7 +822,6 @@ body{
   margin-top:4px;
 }`,
 
-/* 3 — contact */
 `.cv-contact{
   display:flex;
   flex-wrap:wrap;
@@ -745,7 +848,6 @@ body{
   border-bottom-color:var(--accent);
 }`,
 
-/* 4 — sections & h2 */
 `.cv-section{
   padding:32px 40px;
   border-bottom:1px solid var(--bord);
@@ -777,7 +879,6 @@ body{
   font-size:.95rem;
 }`,
 
-/* 5 — expériences */
 `.cv-item{ margin-bottom:26px; }
 .cv-item:last-child{ margin-bottom:0; }
 
@@ -833,7 +934,6 @@ body{
   background:var(--accent);
 }`,
 
-/* 6 — barres de compétences */
 `.cv-skill{ margin-bottom:16px; }
 
 .cv-skill-name{
@@ -867,7 +967,6 @@ body{
   to{ transform:scaleX(1); transform-origin:left; }
 }`,
 
-/* 7 — tags, footer, responsive */
 `.cv-tags{
   display:flex;
   flex-wrap:wrap;
@@ -928,7 +1027,6 @@ body{
   }
   .cv-identite h1{ font-size:1.6rem; }
 }`
-
 ];
 
 /* ============================================================
@@ -1953,59 +2051,38 @@ function escHTML(s){
 
 function hlHTML(code){
   var s = escHTML(code);
-
-  // Commentaires
   s = s.replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="c-com">$1</span>');
-
-  // Valeurs de class
   s = s.replace(/class="([^"]*)"/g, function(m, cls){
     var first = cls.split(/\s+/)[0];
     return '<span class="c-attr">class</span>=<span class="c-str">"<span class="tk" data-tag=".' +
       first + '">' + cls + '</span>"</span>';
   });
-
-  // Autres attributs (href, src, alt, target, rel, datetime)
   s = s.replace(/\s(href|src|alt|target|rel|datetime|lang|charset|name|content)="([^"]*)"/g,
     function(m, a, v){
       return ' <span class="c-attr">' + a + '</span>=<span class="c-str">"' + v + '"</span>';
     });
-
-  // Noms de balises
   s = s.replace(/(&lt;\/?)([a-zA-Z0-9!]+)/g, function(m, br, name){
     if (name === '!DOCTYPE') {
       return br + '<span class="c-tag">' + name + '</span>';
     }
     return br + '<span class="c-tag tk" data-tag="' + name + '">' + name + '</span>';
   });
-
   return s;
 }
 
-/* ============================================================
-   HIGHLIGHTER CSS
-============================================================ */
 function hlCSS(code){
   var s = escHTML(code);
-
-  // Commentaires
   s = s.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="c-com">$1</span>');
-
-  // Sélecteurs (début de ligne avant {)
   s = s.replace(/^([^\n{}]+?)(\s*\{)/gm, function(m, sel, br){
     if (sel.indexOf('<span') !== -1) return m;
     return '<span class="c-sel">' + sel + '</span>' + br;
   });
-
-  // Propriétés
   s = s.replace(/([a-z-]+)(\s*:\s*)([^;\n]+)(;?)/g, function(m, prop, sep, val, semi){
     if (prop.indexOf('span') !== -1) return m;
     return '<span class="c-prop">' + prop + '</span>' + sep +
            '<span class="c-val">' + val + '</span>' + semi;
   });
-
-  // Accolades
   s = s.replace(/([{}])/g, '<span class="c-brace">$1</span>');
-
   return s;
 }
 
@@ -2051,7 +2128,6 @@ function renderStep(){
   var step = STEPS[current];
   var total = STEPS.length;
 
-  /* --- En-tête --- */
   var partLabel = step.part === 'html' ? '🧱 Partie 1 · HTML' : '🎨 Partie 2 · CSS3';
   var partClass = step.part === 'html' ? 'html' : 'css';
 
@@ -2064,16 +2140,13 @@ function renderStep(){
     '<h2>' + step.titre + '</h2>' +
     '<p class="stage-objectif"><span class="ico">🎯</span><span>' + step.objectif + '</span></p>';
 
-  /* --- Colonne gauche --- */
   var left = '';
 
-  // Explication
   left += '<div class="panel">' +
     '<div class="panel-head"><span class="em">📖</span> Comprendre</div>' +
     '<div class="panel-body">' + step.explication + '</div>' +
   '</div>';
 
-  // Code
   var highlighted = step.part === 'html' ? hlHTML(step.code) : hlCSS(step.code);
   left += '<div class="panel">' +
     '<div class="panel-head"><span class="em">💻</span> ' +
@@ -2088,7 +2161,6 @@ function renderStep(){
     '</div>' +
   '</div>';
 
-  // Balises découvertes
   if (step.tags && step.tags.length) {
     var chips = step.tags.map(function(t){
       return '<div class="tag-chip"><code>' + escHTML(t.t) + '</code><span>' + t.d + '</span></div>';
@@ -2099,7 +2171,6 @@ function renderStep(){
     '</div>';
   }
 
-  // Défi
   if (step.defi) {
     left += '<div class="panel">' +
       '<div class="panel-head"><span class="em">🎯</span> À vous de jouer</div>' +
@@ -2107,9 +2178,8 @@ function renderStep(){
     '</div>';
   }
 
-  // Quiz
   if (step.quiz) {
-    var opts = step.quiz.opts.map(function(o, i){
+    var opts = step.quiz.opts.map(function(o){
       return '<button class="quiz-opt" data-ok="' + o.ok + '" data-why="' + o.why.replace(/"/g,'&quot;') + '">' + o.t + '</button>';
     }).join('');
     left += '<div class="panel">' +
@@ -2126,8 +2196,6 @@ function renderStep(){
 
   document.getElementById('colLeft').innerHTML = left;
 
-  /* --- Écouteurs --- */
-  // Copier
   var copyBtn = document.querySelector('[data-copy]');
   if (copyBtn) {
     copyBtn.addEventListener('click', function(){
@@ -2149,17 +2217,16 @@ function renderStep(){
     });
   }
 
-  // Quiz
   var quizBox = document.querySelector('.quiz-box');
   if (quizBox) {
     var fb = quizBox.querySelector('.quiz-fb');
-    var opts = quizBox.querySelectorAll('.quiz-opt');
+    var quizOpts = quizBox.querySelectorAll('.quiz-opt');
     var answered = false;
-    opts.forEach(function(o){
+    quizOpts.forEach(function(o){
       o.addEventListener('click', function(){
         if (answered) return;
         answered = true;
-        opts.forEach(function(x){
+        quizOpts.forEach(function(x){
           x.disabled = true;
           if (x.dataset.ok === 'true') x.classList.add('ok');
         });
@@ -2170,7 +2237,6 @@ function renderStep(){
     });
   }
 
-  // Survol des balises → surbrillance dans l'aperçu
   document.querySelectorAll('.code-block .tk').forEach(function(tk){
     tk.addEventListener('mouseenter', function(){
       highlightInPreview(tk.dataset.tag);
@@ -2178,32 +2244,25 @@ function renderStep(){
     tk.addEventListener('mouseleave', clearHighlight);
   });
 
-  /* --- Aperçu --- */
   updatePreview();
 
-  /* --- Stepper actif --- */
   document.querySelectorAll('.step-btn').forEach(function(b){
     b.classList.toggle('active', parseInt(b.dataset.i, 10) === current);
   });
 
-  /* --- Boutons nav --- */
   document.getElementById('prevBtn').disabled = current === 0;
   document.getElementById('prevBtn').style.opacity = current === 0 ? '.4' : '1';
   document.getElementById('nextBtn').textContent =
     current === total - 1 ? '✓ Atelier terminé' : 'Étape suivante →';
 
-  /* --- Progression --- */
   updateProgress();
 
-  /* --- Overlay vide --- */
   var isEmpty = (step.part === 'html' && (!step.frags || step.frags.length === 0));
   emptyOverlay.style.display = isEmpty ? 'grid' : 'none';
 
-  /* --- Contours --- */
   document.getElementById('outlineToggle').classList.toggle('on', showOutlines && step.part === 'html');
   document.getElementById('outlineToggle').style.opacity = step.part === 'html' ? '1' : '.45';
 
-  /* --- Scroll haut du stage --- */
   document.getElementById('stageHead').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
@@ -2216,9 +2275,7 @@ function updatePreview(){
   frame.srcdoc = doc;
 }
 
-frame.addEventListener('load', function(){
-  injectHlStyle();
-});
+frame.addEventListener('load', function(){ injectHlStyle(); });
 
 function injectHlStyle(){
   try{
@@ -2266,7 +2323,6 @@ function updateProgress(){
   document.getElementById('progLabel').textContent =
     'Étape ' + (current+1) + ' sur ' + STEPS.length + ' · ' + pct + ' %';
 
-  // Chips des balises maîtrisées
   var chips = [];
   STEPS.forEach(function(s, i){
     if (!doneSteps[i]) return;
@@ -2290,11 +2346,9 @@ function updateProgress(){
 ============================================================ */
 function goTo(i){
   if (i < 0 || i >= STEPS.length) return;
-  // Marque l'étape quittée comme terminée
   if (i > current) {
     doneSteps[current] = true;
     saveDone();
-    // Auto-switch des contours
     if (STEPS[current].part === 'html' && STEPS[i].part === 'css') {
       showOutlines = false;
     }
@@ -2316,7 +2370,7 @@ document.getElementById('nextBtn').addEventListener('click', function(){
     saveDone();
     buildStepper();
     renderStep();
-    document.getElementById('bac').scrollIntoView({behavior:'smooth'});
+    document.getElementById('playground').scrollIntoView({behavior:'smooth'});
   }
 });
 
@@ -2354,7 +2408,6 @@ document.getElementById('downloadBtn').addEventListener('click', function(){
   setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
 });
 
-/* Raccourcis clavier */
 document.addEventListener('keydown', function(e){
   var tag = (e.target.tagName || '').toLowerCase();
   if (tag === 'input' || tag === 'textarea') return;
@@ -2363,81 +2416,588 @@ document.addEventListener('keydown', function(e){
 });
 
 /* ============================================================
-   DEVICE SWITCH
+   DEVICE SWITCH (aperçu Atelier)
 ============================================================ */
-document.querySelectorAll('.dev-btn').forEach(function(b){
+document.querySelectorAll('.device-switch .dev-btn').forEach(function(b){
   b.addEventListener('click', function(){
-    document.querySelectorAll('.dev-btn').forEach(function(x){ x.classList.remove('active'); });
+    document.querySelectorAll('.device-switch .dev-btn').forEach(function(x){ x.classList.remove('active'); });
     b.classList.add('active');
     frame.style.width = b.dataset.w;
   });
 });
 
 /* ============================================================
-   BAC À SABLE
+   PLAYGROUND UNIFIÉ — 18 exemples classés par catégorie
 ============================================================ */
 (function(){
-  var ta = document.getElementById('sbCode');
-  var fr = document.getElementById('sbFrame');
-  if (!ta) return;
+  var STORE_KEY = 'cv-playground-v1';
+  var sel = document.getElementById('pgSelect');
+  var ta = document.getElementById('pgCode');
+  var fr = document.getElementById('pgFrame');
+  var desc = document.getElementById('pgDesc');
+  var status = document.getElementById('pgStatus');
+  var info = document.getElementById('pgInfo');
+  if(!sel || !ta) return;
 
-  var defaultDoc = buildDoc(
-    '<div class="cv">\n' + ORDER_ALL.map(function(k){ return F[k]; }).join('\n\n') + '\n</div>',
-    CSS_PARTS.join('\n\n')
-  );
+  var EXAMPLES = {
 
-  function render(){
-    fr.srcdoc = ta.value;
+    'h1': {
+      cat:'🧱 HTML · Structure', titre:'Structure de base',
+      desc:'Le squelette d\'une page HTML5 : <b>&lt;!DOCTYPE&gt;</b>, <b>&lt;html&gt;</b>, <b>&lt;head&gt;</b> et <b>&lt;body&gt;</b>.',
+      html:
+'<h1>Bienvenue sur mon site</h1>\n' +
+'<p>Ceci est mon <strong>premier</strong> paragraphe.\n' +
+'Le HTML décrit le <em>contenu</em>, pas l\'apparence.</p>\n' +
+'<p>Deuxième paragraphe avec un <a href="#">lien</a>.</p>',
+      css:
+'body{font-family:system-ui,sans-serif;padding:24px;line-height:1.7;color:#1b1f33;max-width:640px}\n' +
+'h1{color:#4f46e5;margin:0 0 12px;font-size:1.8rem}\n' +
+'a{color:#06b6d4}'
+    },
+    'h2': {
+      cat:'🧱 HTML · Structure', titre:'Titres et hiérarchie',
+      desc:'Les six niveaux de titres <b>&lt;h1&gt;</b> à <b>&lt;h6&gt;</b>. Un seul h1 par page, puis h2, h3 en cascade.',
+      html:
+'<h1>Titre principal (h1)</h1>\n' +
+'<h2>Section importante (h2)</h2>\n' +
+'<p>Un paragraphe sous la section.</p>\n' +
+'<h3>Sous-section (h3)</h3>\n' +
+'<p>Encore un paragraphe.</p>\n' +
+'<h2>Deuxième section (h2)</h2>\n' +
+'<p>La hiérarchie aide le lecteur ET Google.</p>',
+      css:
+'body{font-family:system-ui,sans-serif;padding:24px;line-height:1.7;color:#1b1f33}\n' +
+'h1{color:#4f46e5;border-bottom:3px solid #4f46e5;padding-bottom:8px}\n' +
+'h2{color:#1b1f33;margin-top:28px}\n' +
+'h3{color:#666e8a;font-weight:600}'
+    },
+    'h3': {
+      cat:'🧱 HTML · Structure', titre:'Liens et images',
+      desc:'La balise <b>&lt;a&gt;</b> (avec <b>href</b> et <b>target</b>) et <b>&lt;img&gt;</b> (avec <b>src</b> et <b>alt</b> obligatoire).',
+      html:
+'<h2>Mes ressources</h2>\n' +
+'<p>Visitez <a href="https://developer.mozilla.org" target="_blank" rel="noopener">MDN Web Docs</a>.</p>\n' +
+'<p><a href="#bas">Aller en bas de page</a></p>\n\n' +
+'<img src="https://picsum.photos/400/200" alt="Photo d\'illustration" width="400">\n' +
+'<p style="font-size:.85rem;color:#888">L\'attribut alt décrit l\'image pour les lecteurs d\'écran.</p>\n\n' +
+'<p id="bas">Vous êtes arrivé en bas !</p>',
+      css:
+'body{font-family:system-ui,sans-serif;padding:24px;line-height:1.7;color:#1b1f33}\n' +
+'img{border-radius:12px;max-width:100%;height:auto;display:block;margin:16px 0}\n' +
+'a{color:#4f46e5;font-weight:600}'
+    },
+    'h4': {
+      cat:'🧱 HTML · Structure', titre:'Listes',
+      desc:'<b>&lt;ul&gt;</b> (à puces), <b>&lt;ol&gt;</b> (numérotée) et leurs <b>&lt;li&gt;</b>.',
+      html:
+'<h2>Liste non ordonnée (ul)</h2>\n' +
+'<ul>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ul>\n\n' +
+'<h2>Liste ordonnée (ol)</h2>\n' +
+'<ol>\n  <li>Analyser le besoin</li>\n  <li>Créer le wireframe</li>\n  <li>Intégrer le code</li>\n</ol>',
+      css:
+'body{font-family:system-ui,sans-serif;padding:24px;line-height:1.8;color:#1b1f33}\n' +
+'h2{color:#4f46e5;font-size:1.15rem;margin-bottom:6px;margin-top:24px}\n' +
+'ul li::marker{color:#4f46e5}\n' +
+'ol li::marker{color:#06b6d4;font-weight:700}'
+    },
+
+    'h5': {
+      cat:'🔗 HTML · Contenu', titre:'Tableau de données',
+      desc:'<b>&lt;table&gt;</b>, <b>&lt;thead&gt;</b>, <b>&lt;tbody&gt;</b>, <b>&lt;tr&gt;</b>, <b>&lt;th&gt;</b>, <b>&lt;td&gt;</b> — pour des données tabulaires (jamais pour la mise en page).',
+      html:
+'<h2>Tarifs 2024</h2>\n' +
+'<table>\n' +
+'  <thead>\n    <tr><th>Formule</th><th>Prix</th><th>Pages</th></tr>\n  </thead>\n' +
+'  <tbody>\n' +
+'    <tr><td>Essentiel</td><td>490 €</td><td>5</td></tr>\n' +
+'    <tr><td>Pro</td><td>990 €</td><td>12</td></tr>\n' +
+'    <tr><td>Premium</td><td>1 890 €</td><td>Illimité</td></tr>\n' +
+'  </tbody>\n' +
+'</table>',
+      css:
+'body{font-family:system-ui,sans-serif;padding:24px;color:#1b1f33}\n' +
+'table{border-collapse:collapse;width:100%;max-width:520px;border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08)}\n' +
+'th{background:#4f46e5;color:#fff;text-align:left;padding:12px 16px;font-size:.85rem}\n' +
+'td{padding:12px 16px;border-bottom:1px solid #eceef6;font-size:.9rem}\n' +
+'tr:last-child td{border-bottom:none}\n' +
+'tbody tr:nth-child(even){background:#f8f9fd}'
+    },
+    'h6': {
+      cat:'🔗 HTML · Contenu', titre:'Formulaire de contact',
+      desc:'<b>&lt;form&gt;</b>, <b>&lt;label&gt;</b>, <b>&lt;input&gt;</b>, <b>&lt;select&gt;</b>, <b>&lt;textarea&gt;</b>, <b>&lt;button&gt;</b> — avec attributs <b>for</b>/<b>id</b> pour l\'accessibilité.',
+      html:
+'<h2>Contactez-nous</h2>\n' +
+'<form>\n' +
+'  <label for="nom">Nom complet</label>\n' +
+'  <input type="text" id="nom" placeholder="Ex. Amina Benali">\n\n' +
+'  <label for="email">Adresse e-mail</label>\n' +
+'  <input type="email" id="email" placeholder="vous@exemple.com">\n\n' +
+'  <label for="sujet">Sujet</label>\n' +
+'  <select id="sujet">\n    <option>Demande de devis</option>\n    <option>Support technique</option>\n    <option>Autre</option>\n  </select>\n\n' +
+'  <label for="msg">Message</label>\n' +
+'  <textarea id="msg" rows="4" placeholder="Votre message..."></textarea>\n\n' +
+'  <button type="submit">Envoyer</button>\n' +
+'</form>',
+      css:
+'body{font-family:system-ui,sans-serif;padding:24px;color:#1b1f33}\n' +
+'form{max-width:420px;display:flex;flex-direction:column;gap:6px}\n' +
+'label{font-size:.8rem;font-weight:700;color:#4f46e5;margin-top:10px;text-transform:uppercase;letter-spacing:.05em}\n' +
+'input,select,textarea{padding:11px 14px;border:1px solid #dfe2ee;border-radius:10px;font-family:inherit;font-size:.92rem;outline:none}\n' +
+'input:focus,select:focus,textarea:focus{border-color:#4f46e5;box-shadow:0 0 0 3px rgba(79,70,229,.12)}\n' +
+'button{margin-top:16px;padding:13px;border:none;border-radius:10px;background:linear-gradient(120deg,#4f46e5,#7c3aed);color:#fff;font-weight:700;font-size:.95rem;cursor:pointer;font-family:inherit}'
+    },
+    'h7': {
+      cat:'🔗 HTML · Contenu', titre:'Balises sémantiques HTML5',
+      desc:'<b>&lt;header&gt;</b>, <b>&lt;nav&gt;</b>, <b>&lt;main&gt;</b>, <b>&lt;section&gt;</b>, <b>&lt;article&gt;</b>, <b>&lt;aside&gt;</b>, <b>&lt;footer&gt;</b> — décrire le rôle plutôt qu\'empiler des div.',
+      html:
+'<header>\n  <h1>Mon Entreprise</h1>\n  <nav>\n    <a href="#">Accueil</a> · <a href="#">Services</a> · <a href="#">Contact</a>\n  </nav>\n</header>\n\n' +
+'<main>\n' +
+'  <section>\n    <h2>Nos services</h2>\n' +
+'    <article>\n      <h3>Création de site</h3>\n      <p>Nous concevons des sites sur mesure.</p>\n    </article>\n' +
+'  </section>\n' +
+'  <aside>\n    <p><strong>Le saviez-vous ?</strong> Le HTML sémantique améliore le SEO.</p>\n  </aside>\n' +
+'</main>\n\n' +
+'<footer>\n  <p>© 2026 Mon Entreprise</p>\n' +
+'</footer>',
+      css:
+'body{font-family:system-ui,sans-serif;margin:0;color:#1b1f33;line-height:1.6}\n' +
+'header{background:#4f46e5;color:#fff;padding:20px 24px}\n' +
+'header h1{margin:0 0 6px;font-size:1.3rem}\n' +
+'header a{color:#c7d2fe;text-decoration:none;font-size:.85rem;font-weight:600}\n' +
+'main{padding:24px}\n' +
+'section h2{color:#4f46e5;font-size:1.15rem}\n' +
+'article{background:#f8f9fd;border-left:4px solid #06b6d4;padding:14px 18px;border-radius:0 10px 10px 0;margin-top:10px}\n' +
+'article h3{margin:0 0 4px;font-size:1rem}\n' +
+'aside{background:#fffbeb;border:1px solid #fde68a;padding:14px 18px;border-radius:10px;margin-top:20px;font-size:.88rem}\n' +
+'footer{background:#1b1f33;color:#98a0c0;padding:16px 24px;font-size:.8rem;text-align:center}'
+    },
+
+    'c1': {
+      cat:'🎨 CSS · Bases', titre:'Sélecteurs et couleurs',
+      desc:'Sélecteur de balise (<b>p</b>), de classe (<b>.intro</b>) et d\'id (<b>#special</b>). Priorité : id > classe > balise.',
+      html:
+'<h1>Sélecteurs CSS</h1>\n' +
+'<p class="intro">Ce paragraphe a une classe <code>intro</code>.</p>\n' +
+'<p>Ce paragraphe est un simple <code>&lt;p&gt;</code>.</p>\n' +
+'<p id="special">Celui-ci possède un id <code>special</code>.</p>',
+      css:
+'p{color:#666e8a;line-height:1.7;margin:10px 0}\n' +
+'.intro{color:#4f46e5;font-weight:700;font-size:1.05rem}\n' +
+'#special{color:#06b6d4;background:#e6faf9;padding:10px 14px;border-radius:8px}\n' +
+'h1{color:#1b1f33;border-bottom:3px solid #4f46e5;padding-bottom:10px}\n' +
+'body{font-family:system-ui,sans-serif;padding:24px;max-width:600px}'
+    },
+    'c2': {
+      cat:'🎨 CSS · Bases', titre:'Classes et réutilisabilité',
+      desc:'Une même classe <b>.card</b> appliquée à plusieurs blocs : une seule règle CSS pour tout styliser. La classe <b>.highlight</b> ajoute une variante.',
+      html:
+'<h2>Nos services</h2>\n' +
+'<div class="card">\n  <h3>Création de site</h3>\n  <p>Site vitrine ou e-commerce sur mesure.</p>\n</div>\n' +
+'<div class="card highlight">\n  <h3>Référencement SEO</h3>\n  <p>Optimisation pour les moteurs de recherche.</p>\n</div>\n' +
+'<div class="card">\n  <h3>Maintenance</h3>\n  <p>Mises à jour et sauvegardes régulières.</p>\n</div>',
+      css:
+'body{font-family:system-ui,sans-serif;padding:24px;background:#f5f6fb;max-width:640px}\n' +
+'h2{color:#1b1f33;font-size:1.2rem}\n' +
+'.card{background:#fff;border:1px solid #e3e5f0;border-radius:14px;padding:18px 20px;margin-bottom:12px;box-shadow:0 4px 16px rgba(23,26,43,.06);transition:.25s}\n' +
+'.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(23,26,43,.12)}\n' +
+'.card h3{margin:0 0 6px;font-size:1rem;color:#4f46e5}\n' +
+'.card p{margin:0;color:#666e8a;font-size:.9rem}\n' +
+'.highlight{border-color:#06b6d4;background:linear-gradient(120deg,#f0fdff,#fff)}'
+    },
+    'c3': {
+      cat:'🎨 CSS · Bases', titre:'Le modèle de boîte',
+      desc:'<b>content</b>, <b>padding</b>, <b>border</b>, <b>margin</b> : les 4 couches de toute boîte. <b>box-sizing: border-box</b> inclut padding + border dans la largeur.',
+      html:
+'<h2>Comprendre margin, border, padding</h2>\n' +
+'<div class="box">\n  <p>Je suis le contenu de la boîte.</p>\n</div>\n' +
+'<div class="box autre">\n  <p>Même boîte, padding différent.</p>\n</div>',
+      css:
+'*{box-sizing:border-box}\n' +
+'body{font-family:system-ui,sans-serif;padding:24px;background:#f5f6fb}\n' +
+'h2{color:#1b1f33;font-size:1.15rem}\n' +
+'.box{\n  width:280px;\n  padding:24px;\n  border:3px solid #4f46e5;\n  margin:0 0 20px;\n  background:#fff;\n  border-radius:12px;\n}\n' +
+'.box p{margin:0;color:#666e8a;font-size:.9rem}\n' +
+'.autre{padding:8px;border-color:#06b6d4}'
+    },
+    'c4': {
+      cat:'🎨 CSS · Bases', titre:'Typographie soignée',
+      desc:'<b>line-height</b>, <b>letter-spacing</b>, <b>max-width</b> sur le corps, hiérarchie par <b>font-size</b>. 60 à 75 caractères par ligne.',
+      html:
+'<h1>Un titre qui respire</h1>\n' +
+'<p class="chapo">Un texte d\'introduction mis en avant, plus grand et plus léger.</p>\n' +
+'<p>La typographie est la colonne vertébrale du design web. Un bon interligne,\n' +
+'une longueur de ligne maîtrisée et une hiérarchie claire rendent la lecture agréable.\n' +
+'On recommande entre 60 et 75 caractères par ligne.</p>\n' +
+'<blockquote>« Le design n\'est pas seulement ce à quoi ça ressemble, c\'est comment ça fonctionne. »</blockquote>',
+      css:
+'body{font-family:Georgia,serif;padding:32px;max-width:680px;margin:auto;color:#1b1f33;line-height:1.75}\n' +
+'h1{font-size:2.2rem;line-height:1.15;letter-spacing:-.02em;margin:0 0 14px}\n' +
+'.chapo{font-size:1.15rem;color:#666e8a;line-height:1.6;margin-bottom:22px}\n' +
+'p{margin:0 0 18px}\n' +
+'blockquote{border-left:4px solid #4f46e5;margin:28px 0;padding:6px 0 6px 20px;font-style:italic;color:#4f46e5;font-size:1.05rem}'
+    },
+    'c5': {
+      cat:'🎨 CSS · Bases', titre:'Pseudo-classes :hover',
+      desc:'<b>:hover</b> change le style au survol de la souris, avec <b>transition</b> pour une animation fluide.',
+      html:
+'<h2>Boutons interactifs</h2>\n' +
+'<a href="#" class="btn">Bouton principal</a>\n' +
+'<a href="#" class="btn ghost">Bouton secondaire</a>\n' +
+'<ul class="liste">\n  <li>Survolez-moi</li>\n  <li>Et moi aussi</li>\n  <li>Pareil ici</li>\n</ul>',
+      css:
+'body{font-family:system-ui,sans-serif;padding:28px;background:#f5f6fb}\n' +
+'h2{color:#1b1f33;font-size:1.15rem}\n' +
+'.btn{display:inline-block;padding:12px 24px;border-radius:11px;background:linear-gradient(120deg,#4f46e5,#7c3aed);color:#fff;text-decoration:none;font-weight:700;font-size:.9rem;transition:.25s;margin-right:10px}\n' +
+'.btn:hover{transform:translateY(-3px);box-shadow:0 12px 26px -10px #4f46e5}\n' +
+'.ghost{background:#fff;color:#4f46e5;border:2px solid #4f46e5}\n' +
+'.ghost:hover{background:#4f46e5;color:#fff}\n' +
+'.liste{list-style:none;padding:0;margin-top:26px;max-width:320px}\n' +
+'.liste li{background:#fff;padding:13px 18px;border-radius:10px;margin-bottom:8px;font-size:.9rem;transition:.22s;border-left:3px solid transparent}\n' +
+'.liste li:hover{border-left-color:#06b6d4;transform:translateX(6px);box-shadow:0 6px 18px rgba(23,26,43,.08)}'
+    },
+
+    'l1': {
+      cat:'📐 CSS · Mise en page', titre:'Flexbox · barre de navigation',
+      desc:'<b>display: flex</b> + <b>justify-content: space-between</b> + <b>align-items: center</b> : le trio pour aligner logo et menu sur une ligne.',
+      html:
+'<header class="navbar">\n' +
+'  <span class="logo">MonSite</span>\n' +
+'  <nav class="menu">\n' +
+'    <a href="#">Accueil</a>\n' +
+'    <a href="#">Services</a>\n' +
+'    <a href="#">Réalisations</a>\n' +
+'    <a href="#" class="cta">Devis</a>\n' +
+'  </nav>\n' +
+'</header>',
+      css:
+'*{box-sizing:border-box;margin:0}\n' +
+'body{font-family:system-ui,sans-serif}\n' +
+'.navbar{display:flex;justify-content:space-between;align-items:center;padding:16px 26px;background:#fff;box-shadow:0 2px 14px rgba(23,26,43,.08)}\n' +
+'.logo{font-weight:800;font-size:1.1rem;color:#4f46e5}\n' +
+'.menu{display:flex;align-items:center;gap:22px}\n' +
+'.menu a{text-decoration:none;color:#666e8a;font-size:.88rem;font-weight:600;transition:.2s}\n' +
+'.menu a:hover{color:#4f46e5}\n' +
+'.cta{background:linear-gradient(120deg,#4f46e5,#7c3aed);color:#fff !important;padding:9px 18px;border-radius:9px}'
+    },
+    'l2': {
+      cat:'📐 CSS · Mise en page', titre:'Flexbox · cartes centrées',
+      desc:'<b>flex-wrap: wrap</b> + <b>justify-content: center</b> + <b>flex: 1 1 200px</b> : des cartes qui s\'ajustent et passent à la ligne si besoin.',
+      html:
+'<div class="wrapper">\n' +
+'  <div class="card">\n    <h3>Formule Essentiel</h3>\n    <p class="price">490 €</p>\n    <button>Souscrire</button>\n  </div>\n' +
+'  <div class="card featured">\n    <h3>Formule Pro</h3>\n    <p class="price">990 €</p>\n    <button>Souscrire</button>\n  </div>\n' +
+'  <div class="card">\n    <h3>Formule Premium</h3>\n    <p class="price">1 890 €</p>\n    <button>Souscrire</button>\n  </div>\n' +
+'</div>',
+      css:
+'*{box-sizing:border-box}\n' +
+'body{font-family:system-ui,sans-serif;background:#f5f6fb;padding:30px 20px}\n' +
+'.wrapper{display:flex;flex-wrap:wrap;justify-content:center;align-items:stretch;gap:20px}\n' +
+'.card{flex:1 1 200px;max-width:260px;background:#fff;border-radius:16px;padding:26px 22px;text-align:center;box-shadow:0 6px 22px rgba(23,26,43,.08);display:flex;flex-direction:column;justify-content:space-between;transition:.25s}\n' +
+'.card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(23,26,43,.14)}\n' +
+'.card h3{margin:0 0 10px;font-size:1rem;color:#1b1f33}\n' +
+'.price{font-size:1.7rem;font-weight:800;color:#4f46e5;margin:0 0 18px}\n' +
+'.card button{padding:11px;border:none;border-radius:9px;background:#eceafe;color:#4f46e5;font-weight:700;cursor:pointer;font-family:inherit;font-size:.88rem}\n' +
+'.featured{border:2px solid #4f46e5}\n' +
+'.featured button{background:linear-gradient(120deg,#4f46e5,#7c3aed);color:#fff}'
+    },
+    'l3': {
+      cat:'📐 CSS · Mise en page', titre:'CSS Grid · galerie',
+      desc:'<b>display: grid</b> + <b>repeat(auto-fit, minmax(140px, 1fr))</b> : une grille qui s\'adapte automatiquement au nombre de colonnes possibles.',
+      html:
+'<h2>Nos réalisations</h2>\n' +
+'<div class="galerie">\n' +
+'  <div class="item">1</div>\n  <div class="item">2</div>\n  <div class="item">3</div>\n' +
+'  <div class="item">4</div>\n  <div class="item">5</div>\n  <div class="item">6</div>\n' +
+'</div>',
+      css:
+'*{box-sizing:border-box}\n' +
+'body{font-family:system-ui,sans-serif;padding:24px;background:#f5f6fb}\n' +
+'h2{color:#1b1f33;font-size:1.15rem}\n' +
+'.galerie{display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:14px;margin-top:16px}\n' +
+'.item{aspect-ratio:1;background:linear-gradient(135deg,#4f46e5,#06b6d4);border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.4rem;transition:.25s}\n' +
+'.item:hover{transform:scale(1.05);box-shadow:0 14px 34px -10px #4f46e5}'
+    },
+    'l4': {
+      cat:'📐 CSS · Mise en page', titre:'Mise en page globale (Grid)',
+      desc:'<b>grid-template-areas</b> : définir un layout complet (header, aside, main, footer) en quelques lignes.',
+      html:
+'<div class="layout">\n' +
+'  <header>Header</header>\n' +
+'  <aside>Menu</aside>\n' +
+'  <main>Contenu principal</main>\n' +
+'  <footer>Footer</footer>\n' +
+'</div>',
+      css:
+'*{box-sizing:border-box;margin:0}\n' +
+'body{font-family:system-ui,sans-serif;padding:16px;background:#f5f6fb}\n' +
+'.layout{\n  display:grid;\n  grid-template-columns:200px 1fr;\n  grid-template-rows:auto 1fr auto;\n  grid-template-areas:\n    "header header"\n    "aside  main"\n    "footer footer";\n  gap:12px;\n  min-height:420px;\n}\n' +
+'.layout header{grid-area:header;background:#4f46e5;color:#fff;padding:18px;border-radius:12px;font-weight:700}\n' +
+'.layout aside{grid-area:aside;background:#fff;padding:18px;border-radius:12px;color:#666e8a;font-size:.9rem;font-weight:600;border:1px solid #e3e5f0}\n' +
+'.layout main{grid-area:main;background:#fff;padding:18px;border-radius:12px;color:#1b1f33;border:1px solid #e3e5f0}\n' +
+'.layout footer{grid-area:footer;background:#1b1f33;color:#98a0c0;padding:16px;border-radius:12px;font-size:.85rem;text-align:center}'
+    },
+    'l5': {
+      cat:'📐 CSS · Mise en page', titre:'Responsive · media queries',
+      desc:'Cliquez sur 📱 <b>Mobile</b> en haut à droite pour voir l\'effet. <b>@media (min-width: 600px)</b> ajoute des règles à partir d\'une certaine largeur.',
+      html:
+'<h2>Redimensionnez la fenêtre</h2>\n' +
+'<p class="hint">Réduisez la largeur de l\'aperçu : les colonnes s\'empilent automatiquement.</p>\n' +
+'<div class="row">\n  <div class="col">Colonne 1</div>\n  <div class="col">Colonne 2</div>\n  <div class="col">Colonne 3</div>\n</div>',
+      css:
+'*{box-sizing:border-box}\n' +
+'body{font-family:system-ui,sans-serif;padding:20px;background:#f5f6fb;color:#1b1f33}\n' +
+'h2{font-size:1.1rem}\n' +
+'.hint{color:#666e8a;font-size:.88rem;margin-bottom:16px}\n' +
+'.row{display:flex;flex-wrap:wrap;gap:12px}\n' +
+'.col{flex:1 1 100%;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;padding:26px 16px;border-radius:12px;text-align:center;font-weight:700}\n\n' +
+'@media (min-width:600px){ .col{flex:1 1 calc(50% - 6px)} }\n' +
+'@media (min-width:900px){ .col{flex:1 1 calc(33.333% - 8px)} }'
+    },
+
+    'sandbox': {
+      cat:'🛠️ Bac à sable libre', titre:'CV complet — tous les acquis réunis',
+      desc:'<b>Le CV complet, HTML + CSS, prêt à personnaliser.</b> Changez les couleurs, les textes, ajoutez des sections… puis téléchargez votre version avec le bouton ⬇️.',
+      html:
+'<div class="cv">\n' +
+'  <header class="cv-header">\n' +
+'    <img class="cv-photo" src="https://i.pravatar.cc/180?img=47" alt="Portrait">\n' +
+'    <div class="cv-identite">\n' +
+'      <h1>Salma Bennani</h1>\n' +
+'      <p class="cv-titre">Chargée de marketing digital</p>\n' +
+'    </div>\n' +
+'  </header>\n\n' +
+'  <ul class="cv-contact">\n' +
+'    <li>📧 <a href="mailto:salma.bennani@exemple.com">salma.bennani@exemple.com</a></li>\n' +
+'    <li>📞 <a href="tel:+212600112233">+212 6 00 11 22 33</a></li>\n' +
+'    <li>📍 Casablanca, Maroc</li>\n' +
+'  </ul>\n\n' +
+'  <section class="cv-section">\n' +
+'    <h2>Profil</h2>\n' +
+'    <p>Étudiante en 2ᵉ année de licence Management, spécialité marketing, je recherche\n' +
+'    un stage de deux mois pour mettre mes compétences au service d\'une équipe dynamique.</p>\n' +
+'  </section>\n\n' +
+'  <section class="cv-section">\n' +
+'    <h2>Compétences</h2>\n' +
+'    <div class="cv-skill">\n' +
+'      <span class="cv-skill-name">Marketing digital</span>\n' +
+'      <div class="cv-bar"><div class="cv-bar-fill niveau-90"></div></div>\n' +
+'    </div>\n' +
+'    <div class="cv-skill">\n' +
+'      <span class="cv-skill-name">HTML &amp; CSS</span>\n' +
+'      <div class="cv-bar"><div class="cv-bar-fill niveau-60"></div></div>\n' +
+'    </div>\n' +
+'  </section>\n' +
+'</div>',
+      css:
+':root{--primaire:#1e3a8a;--primaire-clair:#2563eb;--accent:#0ea5e9;--texte:#1f2937;--gris:#6b7280;--bord:#e5e7eb;--fond:#eef2f7;--blanc:#fff;}\n' +
+'*{margin:0;padding:0;box-sizing:border-box}\n' +
+'body{font-family:\'Segoe UI\',system-ui,sans-serif;background:var(--fond);color:var(--texte);line-height:1.65;padding:32px 16px}\n' +
+'.cv{max-width:820px;margin:0 auto;background:var(--blanc);border-radius:22px;overflow:hidden;box-shadow:0 24px 60px -28px rgba(30,58,138,.5)}\n' +
+'.cv-header{display:flex;align-items:center;gap:24px;padding:36px 40px;background:linear-gradient(135deg,var(--primaire),var(--primaire-clair));color:#fff}\n' +
+'.cv-photo{width:96px;height:96px;object-fit:cover;border-radius:50%;border:3px solid rgba(255,255,255,.55);flex-shrink:0}\n' +
+'.cv-identite h1{font-size:2rem;letter-spacing:-.02em}\n' +
+'.cv-titre{color:#bfdbfe;font-size:1rem;font-weight:500;margin-top:4px}\n' +
+'.cv-contact{display:flex;flex-wrap:wrap;gap:10px 26px;list-style:none;padding:18px 40px;background:#f8fafc;border-bottom:1px solid var(--bord);font-size:.88rem}\n' +
+'.cv-contact a{color:var(--primaire);text-decoration:none;font-weight:600}\n' +
+'.cv-section{padding:32px 40px;border-bottom:1px solid var(--bord)}\n' +
+'.cv-section:last-of-type{border-bottom:none}\n' +
+'.cv-section h2{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--primaire);margin-bottom:20px;display:flex;align-items:center;gap:12px}\n' +
+'.cv-section h2::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--bord),transparent);border-radius:2px}\n' +
+'.cv-section p{color:var(--gris);font-size:.95rem}\n' +
+'.cv-skill{margin-bottom:16px}\n' +
+'.cv-skill-name{display:block;font-size:.88rem;font-weight:600;margin-bottom:7px}\n' +
+'.cv-bar{height:9px;background:#e5e7eb;border-radius:100px;overflow:hidden}\n' +
+'.cv-bar-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--primaire-clair),var(--accent));animation:remplir 1.1s cubic-bezier(.4,0,.2,1) both}\n' +
+'.niveau-90{width:90%}.niveau-60{width:60%}\n' +
+'@keyframes remplir{from{transform:scaleX(0);transform-origin:left}to{transform:scaleX(1);transform-origin:left}}'
+    }
+  };
+
+  var categories = {};
+  Object.keys(EXAMPLES).forEach(function(key){
+    var ex = EXAMPLES[key];
+    if(!categories[ex.cat]) categories[ex.cat] = [];
+    categories[ex.cat].push({key: key, ex: ex});
+  });
+
+  Object.keys(categories).forEach(function(cat){
+    var group = document.createElement('optgroup');
+    group.label = cat;
+    categories[cat].forEach(function(item){
+      var o = document.createElement('option');
+      o.value = item.key;
+      o.textContent = item.ex.titre;
+      group.appendChild(o);
+    });
+    sel.appendChild(group);
+  });
+
+  var currentKey = null;
+  var currentLang = 'html';
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e){ saved = {}; }
+
+  var tabs = document.querySelectorAll('.pg-tab');
+  var dirtyTimer;
+
+  function buildDoc2(html, css){
+    return '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+      '<style>' + css + '</style></head><body>' + html + '</body></html>';
   }
 
-  ta.value = defaultDoc;
-  render();
+  function saveDebounced(){
+    status.textContent = '⏳ Modification...';
+    status.classList.add('dirty');
+    clearTimeout(dirtyTimer);
+    dirtyTimer = setTimeout(function(){
+      save();
+      status.textContent = '✓ Sauvegardé';
+      status.classList.remove('dirty');
+    }, 600);
+  }
 
-  var t;
+  function save(){
+    if(!currentKey) return;
+    saved[currentKey] = saved[currentKey] || {};
+    saved[currentKey][currentLang] = ta.value;
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch(e){}
+  }
+
+  function loadExample(key){
+    currentKey = key;
+    var ex = EXAMPLES[key];
+    var stored = saved[key] || {};
+
+    var html = stored.html !== undefined ? stored.html : ex.html;
+    var css  = stored.css  !== undefined ? stored.css  : ex.css;
+    saved[key] = { html: html, css: css };
+
+    desc.innerHTML = '<b>🎯 ' + ex.titre + ' :</b> ' + ex.desc;
+    showLang(currentLang);
+    render();
+    updateInfo();
+  }
+
+  function showLang(lang){
+    currentLang = lang;
+    tabs.forEach(function(t){ t.classList.toggle('active', t.dataset.lang === lang); });
+    var stored = saved[currentKey] || {};
+    ta.value = stored[lang] !== undefined
+      ? stored[lang]
+      : (lang === 'html' ? EXAMPLES[currentKey].html : EXAMPLES[currentKey].css);
+  }
+
+  function render(){
+    if(!currentKey) return;
+    var stored = saved[currentKey] || {};
+    fr.srcdoc = buildDoc2(stored.html || '', stored.css || '');
+    updateInfo();
+  }
+
+  function updateInfo(){
+    info.textContent = ta.value.length + ' caractères · ' + ta.value.split('\n').length + ' lignes';
+  }
+
+  sel.addEventListener('change', function(){
+    save();
+    loadExample(sel.value);
+  });
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      save();
+      showLang(t.dataset.lang);
+      ta.focus();
+    });
+  });
+
   ta.addEventListener('input', function(){
-    clearTimeout(t);
-    t = setTimeout(render, 500);
+    if(!currentKey) return;
+    saved[currentKey] = saved[currentKey] || {};
+    saved[currentKey][currentLang] = ta.value;
+    saveDebounced();
+    clearTimeout(ta._rt);
+    ta._rt = setTimeout(render, 400);
+    updateInfo();
   });
 
   ta.addEventListener('keydown', function(e){
-    if (e.key === 'Tab') {
+    if (e.key === 'Tab'){
       e.preventDefault();
       var s = ta.selectionStart, en = ta.selectionEnd;
       ta.value = ta.value.substring(0, s) + '  ' + ta.value.substring(en);
       ta.selectionStart = ta.selectionEnd = s + 2;
+      if(currentKey){
+        saved[currentKey] = saved[currentKey] || {};
+        saved[currentKey][currentLang] = ta.value;
+        saveDebounced();
+      }
+    }
+    if (e.ctrlKey && e.key === 'Enter'){
+      e.preventDefault();
+      render();
+      status.textContent = '✓ Rendu forcé';
+      status.classList.remove('dirty');
     }
   });
 
-  document.getElementById('sbReset').addEventListener('click', function(){
-    ta.value = defaultDoc;
-    render();
+  document.getElementById('pgRun').addEventListener('click', function(){
+    save(); render();
+    fr.style.opacity = '.35';
+    setTimeout(function(){ fr.style.opacity = '1'; }, 120);
   });
 
-  document.getElementById('sbCopy').addEventListener('click', function(){
+  document.getElementById('pgCopy').addEventListener('click', function(){
     var btn = this;
     var done = function(){
       var old = btn.textContent;
       btn.textContent = '✓ Copié';
       setTimeout(function(){ btn.textContent = old; }, 1400);
     };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(ta.value).then(done).catch(done);
+    var txt = ta.value;
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done).catch(done);
     } else {
-      ta.select(); try{document.execCommand('copy');}catch(e){}
-      done();
+      ta.select(); try{document.execCommand('copy');}catch(e){} done();
     }
   });
 
-  document.getElementById('sbDownload').addEventListener('click', function(){
-    var blob = new Blob([ta.value], {type:'text/html;charset=utf-8'});
+  document.getElementById('pgDownload').addEventListener('click', function(){
+    if(!currentKey) return;
+    var stored = saved[currentKey] || {};
+    var doc = buildDoc2(stored.html || '', stored.css || '');
+    var blob = new Blob([doc], {type:'text/html;charset=utf-8'});
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'mon-cv.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    a.download = 'playground-' + currentKey + '.html';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
   });
+
+  document.getElementById('pgReset').addEventListener('click', function(){
+    if(!currentKey) return;
+    if(!confirm('Effacer vos modifications pour cet exemple ?')) return;
+    var ex = EXAMPLES[currentKey];
+    saved[currentKey] = { html: ex.html, css: ex.css };
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch(e){}
+    showLang(currentLang);
+    render();
+    status.textContent = '✓ Réinitialisé';
+    status.classList.remove('dirty');
+  });
+
+  document.querySelectorAll('.pg-devices .dev-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.pg-devices .dev-btn').forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      fr.style.width = b.dataset.w;
+    });
+  });
+
+  var firstKey = Object.keys(EXAMPLES)[0];
+  sel.value = firstKey;
+  loadExample(firstKey);
 })();
 
 /* ============================================================
@@ -2530,12 +3090,33 @@ document.querySelectorAll('.dev-btn').forEach(function(b){
 })();
 
 /* ============================================================
+   NAVIGATION ACTIVE AU SCROLL
+============================================================ */
+(function(){
+  var links = document.querySelectorAll('.nav-link');
+  var sections = [];
+  links.forEach(function(l){
+    var id = l.getAttribute('href').slice(1);
+    var s = document.getElementById(id);
+    if (s) sections.push({link: l, el: s});
+  });
+  function upd(){
+    var pos = window.scrollY + 140;
+    var cur = sections[0];
+    sections.forEach(function(s){ if (s.el.offsetTop <= pos) cur = s; });
+    links.forEach(function(l){ l.classList.remove('active'); });
+    if (cur) cur.link.classList.add('active');
+  }
+  window.addEventListener('scroll', upd, {passive: true});
+  upd();
+})();
+
+/* ============================================================
    INITIALISATION
 ============================================================ */
 window.__cvWorkshop = { STEPS: STEPS, getCurrent: function(){ return current; } };
 buildStepper();
 renderStep();
-  
 </script>
 
 <!-- ===== MODE ÉTUDIANT ===== -->
@@ -2543,9 +3124,8 @@ renderStep();
 (function(){
   var KEY = 'cv-workshop-student-mode';
   var isStudent = localStorage.getItem(KEY) === 'on';
-  var revealed = {};   // étapes dont la solution a été révélée
+  var revealed = {};
 
-  /* --- Bouton flottant --- */
   var btn = document.createElement('button');
   btn.className = 'mini-btn';
   btn.style.cssText = 'position:fixed;bottom:22px;left:22px;z-index:95;' +
@@ -2567,9 +3147,7 @@ renderStep();
     apply();
   });
 
-  /* --- Applique ou retire le flou --- */
   function apply(){
-    // Nettoie tout ce qui existe
     document.querySelectorAll('.student-mask').forEach(function(m){ m.remove(); });
     document.querySelectorAll('.code-block').forEach(function(pre){
       pre.style.filter = '';
@@ -2584,9 +3162,8 @@ renderStep();
 
     var activeBtn = document.querySelector('.step-btn.active');
     var idx = activeBtn ? parseInt(activeBtn.dataset.i, 10) : 0;
-    if(revealed[idx]) return;      // déjà révélée : on ne re-floute pas
+    if(revealed[idx]) return;
 
-    // Enveloppe relative pour positionner le masque
     var wrap = pre.parentElement;
     if(!wrap.classList.contains('code-wrap')){
       wrap = document.createElement('div');
@@ -2609,7 +3186,7 @@ renderStep();
       '<div style="max-width:420px">' +
         '<p style="margin:0 0 10px;font-weight:700;font-size:1.05rem">🎓 Mode étudiant</p>' +
         '<p style="margin:0 0 18px;font-size:.88rem;opacity:.92;line-height:1.6">' +
-          'Écrivez d\'abord le code vous-même dans le bac à sable, ' +
+          'Écrivez d\'abord le code vous-même dans le playground, ' +
           'puis comparez avec la solution.' +
         '</p>' +
         '<button class="reveal-solution mini-btn" ' +
@@ -2627,14 +3204,12 @@ renderStep();
     });
   }
 
-  /* --- Réagit au changement d'étape --- */
   var target = document.getElementById('colLeft');
   if(target){
     new MutationObserver(function(){ setTimeout(apply, 80); })
       .observe(target, { childList: true });
   }
 
-  /* --- Réinitialise les solutions révélées si on repart de zéro --- */
   var resetBtn = document.getElementById('resetProgress');
   if(resetBtn){
     resetBtn.addEventListener('click', function(){
@@ -2643,7 +3218,6 @@ renderStep();
     });
   }
 
-  // Première application
   setTimeout(apply, 250);
 })();
 </script>
@@ -2720,66 +3294,10 @@ renderStep();
   </div>
 </section>
 
-<style>
-.lcs{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  box-shadow:var(--shadow);overflow:hidden}
-.lcs-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 20px;
-  background:var(--surface-2);border-bottom:1px solid var(--border)}
-.lcs-ex{display:flex;align-items:center;gap:10px;margin-right:auto}
-.lcs-ex label{font-size:.82rem;font-weight:700;color:var(--muted)}
-.lcs-ex select{padding:8px 12px;border-radius:10px;border:1px solid var(--border);
-  background:var(--surface);color:var(--text);font-family:inherit;font-size:.86rem;
-  font-weight:600;cursor:pointer;min-width:240px}
-.lcs-actions{display:flex;gap:8px;flex-wrap:wrap}
-.lcs-consigne{padding:16px 22px;background:var(--primary-soft);border-bottom:1px solid var(--border);
-  font-size:.9rem;color:var(--text);line-height:1.6}
-.lcs-consigne b{color:var(--primary)}
-.lcs-body{display:grid;grid-template-columns:1fr 1fr;min-height:460px}
-@media(max-width:900px){.lcs-body{grid-template-columns:1fr}}
-.lcs-editor{display:flex;flex-direction:column;background:var(--code-bg)}
-.lcs-tabs{display:flex;align-items:center;gap:4px;padding:8px 12px;
-  background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.07)}
-.lcs-tab{padding:6px 14px;border-radius:7px;border:none;background:transparent;
-  color:#94a3b8;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;transition:.15s}
-.lcs-tab:hover{color:#e2e8f0}
-.lcs-tab.active{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff}
-.lcs-status{margin-left:auto;font-size:.72rem;color:#86efac;font-weight:600;transition:.2s}
-.lcs-status.dirty{color:#fbbf24}
-#lcsCode{flex:1;width:100%;min-height:400px;border:none;outline:none;resize:none;
-  background:var(--code-bg);color:var(--code-text);font-family:'JetBrains Mono',ui-monospace,monospace;
-  font-size:.82rem;line-height:1.75;padding:18px;tab-size:2}
-.lcs-preview-wrap{display:flex;flex-direction:column;border-left:1px solid var(--border)}
-@media(max-width:900px){.lcs-preview-wrap{border-left:none;border-top:1px solid var(--border)}}
-.lcs-preview-head{display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;background:var(--surface-2);border-bottom:1px solid var(--border)}
-.lcs-devices{display:flex;gap:3px;background:var(--surface);border:1px solid var(--border);
-  border-radius:8px;padding:2px}
-.lcs-devices .dev-btn{border:none;background:none;padding:5px 10px;border-radius:6px;
-  font-size:.75rem;cursor:pointer;font-family:inherit;transition:.15s}
-.lcs-devices .dev-btn.active{background:linear-gradient(120deg,var(--primary),var(--primary-2));color:#fff}
-.lcs-preview-stage{flex:1;display:flex;justify-content:center;padding:14px;
-  background:repeating-conic-gradient(var(--surface-3) 0% 25%, transparent 0% 50%) 50%/18px 18px;
-  overflow:auto}
-#lcsFrame{width:100%;height:100%;min-height:400px;border:none;background:#fff;
-  border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.14);transition:width .35s}
-.lcs-foot{display:flex;justify-content:space-between;align-items:center;padding:9px 20px;
-  background:var(--surface-2);border-top:1px solid var(--border);font-size:.74rem;
-  color:var(--muted);font-weight:600}
-.lcs-compare{border-top:1px solid var(--border);background:var(--surface-2)}
-.lcs-compare-head{display:flex;align-items:center;gap:12px;padding:12px 20px;
-  border-bottom:1px solid var(--border)}
-.lcs-compare-body{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px 20px}
-@media(max-width:760px){.lcs-compare-body{grid-template-columns:1fr}}
-.lcs-compare-body pre{max-height:280px;overflow:auto}
-</style>
-
 <script>
 (function(){
   var STORE_KEY = 'cv-live-studio-v1';
 
-  /* =====================================================
-     BIBLIOTHÈQUE D'EXERCICES
-  ===================================================== */
   var EXERCISES = [
     {
       id: 'ex1',
@@ -3054,8 +3572,7 @@ renderStep();
 '\n' +
 '  <button type="submit">Envoyer</button>\n' +
 '</form>',
-      solutionCss:
-'/* Solution identique — voir HTML ci-contre */'
+      solutionCss: '/* Solution identique — voir HTML ci-contre */'
     },
 
     {
@@ -3194,9 +3711,6 @@ renderStep();
     }
   ];
 
-  /* =====================================================
-     RÉFÉRENCES DOM
-  ===================================================== */
   var sel = document.getElementById('lcsSelect');
   var ta = document.getElementById('lcsCode');
   var fr = document.getElementById('lcsFrame');
@@ -3215,18 +3729,12 @@ renderStep();
   try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch(e){ saved = {}; }
   var dirtyTimer;
 
-  /* =====================================================
-     CONSTRUCTION DOC
-  ===================================================== */
   function buildDoc(html, css){
     return '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">' +
       '<meta name="viewport" content="width=device-width, initial-scale=1">' +
       '<style>' + css + '</style></head><body>' + html + '</body></html>';
   }
 
-  /* =====================================================
-     SAUVEGARDE
-  ===================================================== */
   function saveDebounced(){
     status.textContent = '⏳ Modification...';
     status.classList.add('dirty');
@@ -3244,18 +3752,13 @@ renderStep();
     try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); } catch(e){}
   }
 
-  /* =====================================================
-     AFFICHAGE
-  ===================================================== */
   function loadExercise(id){
     currentEx = EXERCISES.find(function(e){ return e.id === id; }) || EXERCISES[0];
     var stored = saved[currentEx.id] || {};
 
-    // Charge le code sauvegardé OU le code de départ
     var html = stored.html !== undefined ? stored.html : currentEx.html;
     var css  = stored.css  !== undefined ? stored.css  : currentEx.css;
 
-    // Stocke les deux versions en mémoire
     saved[currentEx.id] = { html: html, css: css };
 
     consigne.innerHTML = '<b>🎯 Consigne :</b> ' + currentEx.consigne;
@@ -3283,10 +3786,6 @@ renderStep();
     info.textContent = ta.value.length + ' caractères · ' + (ta.value.split('\n').length) + ' lignes';
   }
 
-  /* =====================================================
-     ÉCOUTEURS
-  ===================================================== */
-  // Remplir le select
   EXERCISES.forEach(function(ex){
     var o = document.createElement('option');
     o.value = ex.id;
@@ -3299,7 +3798,6 @@ renderStep();
     loadExercise(sel.value);
   });
 
-  // Onglets HTML / CSS
   tabs.forEach(function(t){
     t.addEventListener('click', function(){
       save();
@@ -3308,18 +3806,15 @@ renderStep();
     });
   });
 
-  // Frappe dans le textarea
   ta.addEventListener('input', function(){
     var stored = saved[currentEx.id] || (saved[currentEx.id] = {});
     stored[currentLang] = ta.value;
     saveDebounced();
-    // Debounce sur le rendu aussi
     clearTimeout(ta._rt);
     ta._rt = setTimeout(render, 300);
     updateInfo();
   });
 
-  // Tab = 2 espaces
   ta.addEventListener('keydown', function(e){
     if (e.key === 'Tab') {
       e.preventDefault();
@@ -3330,7 +3825,6 @@ renderStep();
       stored[currentLang] = ta.value;
       saveDebounced();
     }
-    // Ctrl + Entrée = forcer le rendu
     if (e.ctrlKey && e.key === 'Enter') {
       e.preventDefault();
       render();
@@ -3339,12 +3833,10 @@ renderStep();
     }
   });
 
-  // Indice
   document.getElementById('lcsHint').addEventListener('click', function(){
     alert('💡 INDICE\n\n' + currentEx.hint.replace(/<\/?[^>]+>/g, ''));
   });
 
-  // Comparer
   document.getElementById('lcsCompare').addEventListener('click', function(){
     save();
     var stored = saved[currentEx.id] || {};
@@ -3360,7 +3852,6 @@ renderStep();
     comparePanel.hidden = true;
   });
 
-  // Réinitialiser
   document.getElementById('lcsReset').addEventListener('click', function(){
     if(!confirm('Effacer vos modifications et revenir au code de départ ?')) return;
     saved[currentEx.id] = { html: currentEx.html, css: currentEx.css };
@@ -3371,7 +3862,6 @@ renderStep();
     status.classList.remove('dirty');
   });
 
-  // Switch device
   document.querySelectorAll('.lcs-devices .dev-btn').forEach(function(b){
     b.addEventListener('click', function(){
       document.querySelectorAll('.lcs-devices .dev-btn').forEach(function(x){ x.classList.remove('active'); });
@@ -3380,10 +3870,9 @@ renderStep();
     });
   });
 
-  // Libellé de la consigne depuis le select
   loadExercise(EXERCISES[0].id);
 })();
 </script>
-  
+
 </body>
 </html>
