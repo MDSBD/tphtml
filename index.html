@@ -2532,8 +2532,120 @@ document.querySelectorAll('.dev-btn').forEach(function(b){
 /* ============================================================
    INITIALISATION
 ============================================================ */
+window.__cvWorkshop = { STEPS: STEPS, getCurrent: function(){ return current; } };
 buildStepper();
 renderStep();
+  
+</script>
+
+<!-- ===== MODE ÉTUDIANT ===== -->
+<script>
+(function(){
+  var KEY = 'cv-workshop-student-mode';
+  var isStudent = localStorage.getItem(KEY) === 'on';
+  var revealed = {};   // étapes dont la solution a été révélée
+
+  /* --- Bouton flottant --- */
+  var btn = document.createElement('button');
+  btn.className = 'mini-btn';
+  btn.style.cssText = 'position:fixed;bottom:22px;left:22px;z-index:95;' +
+    'padding:11px 18px;font-weight:700;border:none;color:#fff;' +
+    'box-shadow:0 10px 24px rgba(79,70,229,.35);transition:.2s';
+  function syncBtn(){
+    btn.textContent = isStudent ? '🎓 Étudiant : ON' : '🎓 Étudiant : OFF';
+    btn.style.background = isStudent
+      ? 'linear-gradient(120deg,#10b981,#059669)'
+      : 'linear-gradient(120deg,#4f46e5,#7c3aed)';
+  }
+  syncBtn();
+  document.body.appendChild(btn);
+
+  btn.addEventListener('click', function(){
+    isStudent = !isStudent;
+    localStorage.setItem(KEY, isStudent ? 'on' : 'off');
+    syncBtn();
+    apply();
+  });
+
+  /* --- Applique ou retire le flou --- */
+  function apply(){
+    // Nettoie tout ce qui existe
+    document.querySelectorAll('.student-mask').forEach(function(m){ m.remove(); });
+    document.querySelectorAll('.code-block').forEach(function(pre){
+      pre.style.filter = '';
+      pre.style.pointerEvents = '';
+      pre.style.userSelect = '';
+    });
+
+    if(!isStudent) return;
+
+    var pre = document.querySelector('#colLeft .code-block');
+    if(!pre) return;
+
+    var activeBtn = document.querySelector('.step-btn.active');
+    var idx = activeBtn ? parseInt(activeBtn.dataset.i, 10) : 0;
+    if(revealed[idx]) return;      // déjà révélée : on ne re-floute pas
+
+    // Enveloppe relative pour positionner le masque
+    var wrap = pre.parentElement;
+    if(!wrap.classList.contains('code-wrap')){
+      wrap = document.createElement('div');
+      wrap.className = 'code-wrap';
+      wrap.style.cssText = 'position:relative';
+      pre.parentNode.insertBefore(wrap, pre);
+      wrap.appendChild(pre);
+    }
+
+    pre.style.filter = 'blur(7px)';
+    pre.style.pointerEvents = 'none';
+    pre.style.userSelect = 'none';
+
+    var mask = document.createElement('div');
+    mask.className = 'student-mask';
+    mask.style.cssText = 'position:absolute;inset:0;display:grid;place-items:center;' +
+      'background:rgba(15,23,42,.62);border-radius:12px;color:#fff;text-align:center;' +
+      'padding:24px;z-index:5';
+    mask.innerHTML =
+      '<div style="max-width:420px">' +
+        '<p style="margin:0 0 10px;font-weight:700;font-size:1.05rem">🎓 Mode étudiant</p>' +
+        '<p style="margin:0 0 18px;font-size:.88rem;opacity:.92;line-height:1.6">' +
+          'Écrivez d\'abord le code vous-même dans le bac à sable, ' +
+          'puis comparez avec la solution.' +
+        '</p>' +
+        '<button class="reveal-solution mini-btn" ' +
+        'style="background:#fff;color:#4f46e5;font-weight:700;border:none;' +
+        'padding:11px 22px;cursor:pointer">👁️ Voir la solution</button>' +
+      '</div>';
+    wrap.appendChild(mask);
+
+    mask.querySelector('.reveal-solution').addEventListener('click', function(){
+      revealed[idx] = true;
+      pre.style.filter = '';
+      pre.style.pointerEvents = '';
+      pre.style.userSelect = '';
+      mask.remove();
+    });
+  }
+
+  /* --- Réagit au changement d'étape --- */
+  var target = document.getElementById('colLeft');
+  if(target){
+    new MutationObserver(function(){ setTimeout(apply, 80); })
+      .observe(target, { childList: true });
+  }
+
+  /* --- Réinitialise les solutions révélées si on repart de zéro --- */
+  var resetBtn = document.getElementById('resetProgress');
+  if(resetBtn){
+    resetBtn.addEventListener('click', function(){
+      revealed = {};
+      setTimeout(apply, 150);
+    });
+  }
+
+  // Première application
+  setTimeout(apply, 250);
+})();
 </script>
 </body>
 </html>
